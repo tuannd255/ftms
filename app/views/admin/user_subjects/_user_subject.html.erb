@@ -72,7 +72,7 @@
       <% elsif user_subject.progress? %>
         <%= link_to t("admin.actions.show_subject.finish"),
           [:admin, @course_subject, user_subject],
-          method: :patch, remote: true, class: "btn btn-success btn-status" %>
+          method: :patch, remote: true, class: "btn btn-danger btn-status" %>
       <% end %>
     <% end %>
   </td>

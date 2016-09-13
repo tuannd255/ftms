@@ -63,12 +63,12 @@ class UserSubject < ApplicationRecord
 
   def update_status current_user
     if init?
-      update_attributes(status: :progress, start_date: Time.now,
-        end_date: Time.now + during_time.days)
+      update_attributes status: :progress, start_date: Date.today,
+        end_date: set_end_date(Date.today, during_time)
       key = "user_subject.start_subject"
       notification_key = Notification.keys[:start]
     else
-      update_attributes status: :finish, user_end_date: Time.now
+      update_attributes status: :finish, user_end_date: Date.today
       key = "user_subject.finish_subject"
       notification_key = Notification.keys[:finish]
     end
@@ -110,10 +110,10 @@ class UserSubject < ApplicationRecord
     if start_date.present?
       current_date = user_end_date
       current_date ||= Time.zone.today
-      
-      real_duration_time = end_date - start_date 
+
+      real_duration_time = end_date - start_date
       return 100 if real_duration_time <= 0
-      
+
       user_current_time = (current_date - start_date).to_f
       percent = user_current_time * 100 / real_duration_time.to_f
       [percent, 100].min
@@ -131,5 +131,9 @@ class UserSubject < ApplicationRecord
   def check_end_date
     errors.add :end_date, I18n.t("error.wrong_end_date") if
       start_date.present? && (start_date > Date.today || start_date > end_date)
+  end
+
+  def set_end_date start_date, duration
+    start_date + (duration + (duration / 5).to_i * 2 - 1).day
   end
 end
