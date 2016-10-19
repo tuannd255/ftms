@@ -1,9 +1,9 @@
 class Admin::CoursesController < ApplicationController
   load_and_authorize_resource
   skip_load_resource only: [:show, :edit]
-  before_action :load_data, except: [:index, :show, :destroy]
   before_action :find_course_in_show, only: :show
   before_action :find_course_in_edit, only: :edit
+  before_action :load_data, only: [:new, :edit, :show]
 
   def index
     respond_to do |format|
@@ -32,8 +32,14 @@ class Admin::CoursesController < ApplicationController
       redirect_to admin_course_path @course
     else
       flash[:failed] = flash_message "not_created"
+      load_data
       render :new
     end
+  end
+
+  def show
+    add_breadcrumb_path "courses"
+    add_breadcrumb @course.name, :admin_course_path
   end
 
   def update
@@ -43,15 +49,9 @@ class Admin::CoursesController < ApplicationController
       redirect_to admin_course_path(@course)
     else
       flash[:failed] = flash_message "not_updated"
+      load_data
       render :edit
     end
-  end
-
-  def show
-    @supports = Supports::Course.new @course
-
-    add_breadcrumb_path "courses"
-    add_breadcrumb @course.name, :admin_course_path
   end
 
   def destroy
@@ -69,9 +69,7 @@ class Admin::CoursesController < ApplicationController
   end
 
   def load_data
-    @subjects = Subject.all
-    @programming_languages = ProgrammingLanguage.all
-    @locations = Location.all
+    @supports ||= Supports::Course.new @course
   end
 
   def find_course_in_show

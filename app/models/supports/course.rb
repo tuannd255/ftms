@@ -40,4 +40,16 @@ class Supports::Course
         )
     end
   end
+
+  def subjects
+    @subjects ||= Subject.all
+  end
+
+  %w(programming_languages locations).each do |objects|
+    define_method objects do
+      instance_variable_set "@#{objects}",
+        objects.classify.constantize.all.collect {|object| [object.name,
+        object.id]}
+    end
+  end
 end

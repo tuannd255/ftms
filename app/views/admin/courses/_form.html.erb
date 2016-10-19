@@ -60,15 +60,15 @@
       <span><%= t "courses.language" %></span>
     </div>
     <div class="col-md-3">
-      <%= f.select :programming_language_id, @programming_languages.collect{|u| [u.name, u.id]},
-        {prompt: ""}, {selected: f.object.programming_language_id, required: true,
-        class: "form-control"} %>
+      <%= f.select :programming_language_id, @supports.programming_languages,
+        {prompt: ""}, {selected: f.object.programming_language_id,
+        required: true, class: "form-control"} %>
     </div>
     <div class="col-md-3 text-right">
       <span><%= t "courses.location" %></span>
     </div>
     <div class="col-md-3">
-      <%= f.select :location_id, @locations.collect{|u| [u.name, u.id]},
+      <%= f.select :location_id, @supports.locations,
         {prompt: ""}, {selected: f.object.location_id, required: true,
         class: "form-control"} %>
     </div>
@@ -78,7 +78,8 @@
       <span><%= t "courses.list_subjects" %></span>
     </div>
     <div class="col-md-9">
-      <%= f.collection_check_boxes :subject_ids, @subjects, :id, :name do |b| %>
+      <%= f.collection_check_boxes :subject_ids, @supports.subjects,
+        :id, :name do |b| %>
         <span class="label label-default list-subjects">
           <%= b.label do %>
             <%= b.check_box %>&nbsp;

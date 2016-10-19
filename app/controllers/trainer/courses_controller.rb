@@ -1,9 +1,9 @@
 class Trainer::CoursesController < ApplicationController
   load_and_authorize_resource
   skip_load_resource only: [:show, :edit]
-  before_action :load_data, except: [:index, :show, :destroy]
   before_action :find_course_in_show, only: :show
   before_action :find_course_in_edit, only: :edit
+  before_action :load_data, only: [:new, :show, :edit]
 
   def index
     respond_to do |format|
@@ -20,20 +20,26 @@ class Trainer::CoursesController < ApplicationController
     add_breadcrumb_new "courses"
   end
 
-  def edit
-    add_breadcrumb_path "courses"
-    add_breadcrumb @course.name, :trainer_course_path
-    add_breadcrumb_edit "courses"
-  end
-
   def create
     if @course.save
       flash[:success] = flash_message "created"
       redirect_to trainer_courses_path
     else
       flash[:failed] = flash_message "not_created"
+      load_data
       render :new
     end
+  end
+
+  def show
+    add_breadcrumb_path "courses"
+    add_breadcrumb @course.name, :trainer_course_path
+  end
+
+  def edit
+    add_breadcrumb_path "courses"
+    add_breadcrumb @course.name, :trainer_course_path
+    add_breadcrumb_edit "courses"
   end
 
   def update
@@ -42,14 +48,9 @@ class Trainer::CoursesController < ApplicationController
       redirect_to trainer_course_path(@course)
     else
       flash[:failed] = flash_message "not_updated"
+      load_data
       render :edit
     end
-  end
-
-  def show
-    @supports = Supports::Course.new @course
-    add_breadcrumb_path "courses"
-    add_breadcrumb @course.name, :trainer_course_path
   end
 
   def destroy
@@ -67,9 +68,7 @@ class Trainer::CoursesController < ApplicationController
   end
 
   def load_data
-    @subjects = Subject.all
-    @programming_languages = ProgrammingLanguage.all
-    @locations = Location.all
+    @supports ||= Supports::Course.new @course
   end
 
   def find_course_in_show
