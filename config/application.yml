@@ -117,6 +117,14 @@ defaults: &defaults
     - trainee_types
     - universities
     - programming_languages
+  all_functions:
+    - index
+    - new
+    - create
+    - edit
+    - update
+    - show
+    - destroy
 development:
   <<: *defaults
   neat_setting: 800

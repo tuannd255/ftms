@@ -1,8 +1,8 @@
 class Admin::DashboardController < ApplicationController
-  authorize_resource class: false
 
   def index
-    add_breadcrumb_index "dashboard"
+    authorize_with_multiple page_params, Admin::UserFunctionPolicy
     @dashboard_support = Supports::Dashboard.new
+    add_breadcrumb_index "dashboard"
   end
 end

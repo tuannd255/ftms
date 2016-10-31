@@ -17,6 +17,20 @@ class ApplicationController < ActionController::Base
     {locale: I18n.locale}
   end
 
+  def authorize_with_multiple args, policy
+    pundit_policy = policy.new current_user, args
+    query ||= "#{params[:action]}?"
+    unless pundit_policy.public_send query
+      error = NotAuthorizedError.new "not allowed"
+      raise error
+    end
+  end
+
+  def page_params
+    Hash[:controller, params[:controller], :action, params[:action],
+      :user_functions, current_user.user_functions]
+  end
+
   def load_user
     @user = User.includes(:profile).find_by id: params[:id]
     if @user.nil?
