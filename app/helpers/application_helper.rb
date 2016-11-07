@@ -277,4 +277,8 @@ module ApplicationHelper
     assigned_trainer_ids.include?(trainer_program_builder.object.user_id) &&
       !trainer_program_builder.object.deleted?
   end
+
+  def find_user_course trainee, course
+    UserCourse.find_by user: trainee, course: course
+  end
 end

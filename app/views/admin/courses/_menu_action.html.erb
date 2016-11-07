@@ -1,0 +1,51 @@
+<div class="dropdown pull-right menu-action-course">
+  <button id="dLabel" type="button" data-toggle="dropdown"
+    aria-haspopup="true" aria-expanded="false"
+    class="btn btn-default">
+    <span class="glyphicon glyphicon-align-justify"
+      aria-hidden="true"></span>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-right"
+    aria-labelledby="dLabel">
+    <% if @course.init? %>
+      <li>
+        <%= link_to admin_course_change_status_courses_path(@course),
+          data: {method: :patch,
+          confirm: t("courses.confirms.confirm_start")} do %>
+          <i class="fa fa-check" aria-hidden="true"></i>
+          <%= t "courses.start" %>
+        <% end %>
+      </li>
+    <% elsif @course.progress? %>
+      <li>
+        <%= link_to admin_course_change_status_courses_path(@course),
+          data: {method: :patch,
+          confirm: t("courses.confirms.confirm_finish")} do %>
+          <i class="fa fa-minus-square-o" aria-hidden="true"></i>
+          <%= t "courses.finish_course" %>
+        <% end %>
+      </li>
+    <% end %>
+    <li>
+      <%= link_to admin_course_clone_courses_path(@course),
+        data: {method: :post,
+        confirm: t("courses.confirms.confirm_clone")} do %>
+        <i class="fa fa-minus-square-o" aria-hidden="true"></i>
+        <%= t "courses.clone" %>
+      <% end %>
+    </li>
+    <li>
+      <%= link_to edit_admin_course_path do %>
+        <i class="fa fa-pencil" aria-hidden="true"></i>
+        <%= t "buttons.edit" %>
+      <% end %>
+    </li>
+    <li>
+      <%= link_to admin_course_path(@course), data: {method: :delete,
+        confirm: t("messages.delete.confirm")} do %>
+        <i class="fa fa-trash" aria-hidden="true"></i>
+        <%= t "buttons.delete" %>
+      <% end %>
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,11 @@
+<% if user_course.progress? %>
+  <%= link_to t("buttons.finish"), [:admin, user_course, status: :finish],
+    remote: true, method: :patch, title: t("courses.finish_course"),
+    data: {confirm: t("user_courses.finish_confirm",
+    name: user_course.user_name)}, class: "btn btn-danger btn-xs" %>
+<% else %>
+  <div class="btn-xs <%= set_background_color_status user_course.status %>"
+    title="<%= t "buttons.finished" %>">
+    <%= t "buttons.finished" %>
+  </div>
+<% end %>

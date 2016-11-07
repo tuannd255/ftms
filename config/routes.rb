@@ -54,7 +54,8 @@ Rails.application.routes.draw do
     resources :exams, only: :index
     resources :statistics, only: [:index, :create]
     resources :stages
-    resources :programs
+    resources :programs, except: :destroy
+    resources :user_courses, only: :update
   end
 
   namespace :trainer do

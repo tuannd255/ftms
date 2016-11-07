@@ -14,7 +14,6 @@ class UserCourse < ApplicationRecord
 
   has_many :user_subjects, dependent: :destroy
 
-  scope :actived, ->{where active: true}
   scope :course_progress, ->{joins(:course)
     .where("courses.status = ?", Course.statuses[:progress]).order :updated_at}
   scope :course_finished, ->{joins(:course)
@@ -26,6 +25,8 @@ class UserCourse < ApplicationRecord
 
   delegate :id, :name, to: :user, prefix: true, allow_nil: true
   delegate :name, to: :course_programming_language, prefix: true, allow_nil: true
+
+  enum status: [:init, :progress, :finish]
 
   private
   def create_user_subjects_when_assign_new_user

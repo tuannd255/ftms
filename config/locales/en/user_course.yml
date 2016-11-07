@@ -1,0 +1,3 @@
+en:
+  user_courses:
+    finish_confirm: "Are you sure finish this course for %{name}"

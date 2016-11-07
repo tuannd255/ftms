@@ -1,0 +1,4 @@
+$("#user-course-<%= @user_course.id %>")
+  .replaceWith("<%= j render 'shared/user_course', user_course: @user_course %>");
+$(".label-user-<%= @user_course.user_id %>").addClass("label-user-finish");
+$(".flash").html("<%= j render "shared/flash_banner" %>");

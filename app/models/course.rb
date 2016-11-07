@@ -48,10 +48,6 @@ class Course < ApplicationRecord
   delegate :name, to: :location, prefix: true, allow_nil: true
   delegate :name, to: :program, prefix: true, allow_nil: true
 
-  def active_user_courses_when_start_course
-    user_courses.update_all active: true
-  end
-
   def check_end_date
     if start_date.present?
       if end_date.present?
@@ -72,12 +68,13 @@ class Course < ApplicationRecord
 
   def start_course current_user
     update_attributes status: :progress
-    active_user_courses_when_start_course
+    user_courses.update_all status: :progress
     create_activity key: "course.start_course", owner: current_user
   end
 
   def finish_course current_user
     update_attributes status: :finish
+    user_courses.progress.update_all status: :finish
     create_activity key: "course.finish_course", owner: current_user
   end
 
