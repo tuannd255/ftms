@@ -1,0 +1,45 @@
+<div id="role-allocate">
+  <div class="row">
+    <div class="col-md-12">
+      <table id="tbl-role-allocate" class="table table-striped">
+        <thead>
+          <tr>
+            <th class="select-all">
+              <%= check_box_tag "select-permission-all", "select-all", false %>
+              <label for="select-permission-all">
+                <%= t "roles.select_all" %>
+              </label>
+            </th>
+            <% Settings.all_functions.each do |function| %>
+              <th><%= function.capitalize %></th>
+            <% end %>
+          </tr>
+        </thead>
+        <tbody>
+          <% @routes.each do |route| %>
+            <tr>
+              <td><%= route[:controller] %></td>
+              <% Settings.all_functions.each do |function| %>
+                <% if route[:actions].include? function %>
+                  <%= f.fields_for :functions, @role.functions.build do |builder| %>
+                    <%= builder.hidden_field :id,
+                      value: @role.decorate.function(function, route[:controller]) %>
+                    <%= builder.hidden_field :model_class, value: route[:controller] %>
+                    <%= builder.hidden_field :action, value: function %>
+                    <td>
+                      <%= builder.check_box :_destroy,
+                        {checked: @role.decorate.function(function,
+                        route[:controller]).present?}, false, true %>
+                    </td>
+                  <% end %>
+                <% else %>
+                  <td><span class="hidden"><%= t "roles.na" %></span></td>
+                <% end %>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -76,6 +76,7 @@
 //= require admin/program
 //= require navbar_admin
 //= require ajax_session_devise
+//= require admin/role_allocate_function
 
 $(document).on("turbolinks:load ajaxComplete", function() {
   $(".alert").delay(3000).fadeOut();

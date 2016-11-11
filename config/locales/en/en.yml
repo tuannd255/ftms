@@ -114,6 +114,7 @@ en:
     search_name: "Search name"
     search_name_email: "Search name or email"
     show_menu: "Show _MENU_"
+    search_controller: "Search controller name"
   notifications:
     notification: "Notifications"
   feed_backs:

@@ -154,6 +154,17 @@ defaults: &defaults
     - ProgrammingLanguage
     - Status
     - UserType
+  controller_names:
+    - "devise"
+    - "sessions"
+    - "passwords"
+    - "static_pages"
+    - "read_marks"
+    - "chats"
+    - "messages"
+    - "notifications"
+    - "filter_datas"
+    - "calendars"
 development:
   <<: *defaults
   neat_setting: 800

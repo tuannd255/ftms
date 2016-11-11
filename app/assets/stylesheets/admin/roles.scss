@@ -3,4 +3,7 @@
     padding-top: 20px;
     padding-left: 30px;
   }
+  .dataTables_scrollHeadInner, .dataTable {
+    width: 100% !important;
+  }
 }

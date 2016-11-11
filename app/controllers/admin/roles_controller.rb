@@ -1,6 +1,7 @@
 class Admin::RolesController < ApplicationController
   before_action :authorize
   before_action :load_role, only: [:edit, :update, :destroy]
+  before_action :load_routes, only: [:new, :edit]
 
   def index
     respond_to do |format|
@@ -64,5 +65,24 @@ class Admin::RolesController < ApplicationController
       redirect_to admin_roles_path
       flash[:alert] = flash_message "not_find"
     end
+  end
+
+  def load_routes
+    @routes = []
+    temp = Rails.application.routes.set.anchored_routes.map(&:defaults)
+      .reject {|route| route[:internal] || check_route(route[:controller])}
+
+    temp.pluck(:controller).uniq.each do |controller|
+      @routes << Hash["controller".to_sym, controller, "actions".to_sym,
+        temp.select {|route| route[:controller] == controller}.pluck(:action).uniq]
+    end
+    @routes
+  end
+
+  def check_route route
+    Settings.controller_names.each do |object|
+      return true if route.include? object
+    end
+    false
   end
 end

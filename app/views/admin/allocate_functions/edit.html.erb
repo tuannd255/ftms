@@ -17,20 +17,23 @@
         <label for="select-permission-all"><%= t "roles.select_all" %></label>
       </th>
     </tr>
-    <% $model_classes.each do |model_class| %>
+    <% @routes.each do |route| %>
       <tr>
-        <td><%= model_class %></td>
+        <td><%= route[:controller] %></td>
 
         <% Settings.all_functions.each do |function| %>
-          <%= f.fields_for :functions, @role.functions.build do |builder| %>
-            <%= builder.hidden_field :id, value: @role.decorate.function(function,
-              model_class) %>
-            <%= builder.hidden_field :model_class, value: model_class.name %>
-            <%= builder.hidden_field :action, value: function %>
-            <td>
-              <%= builder.check_box :_destroy, {checked: @role.decorate.function(function,
-                model_class).present?}, false, true %>
-            </td>
+          <% if route[:actions].include? function %>
+            <%= f.fields_for :functions, @role.functions.build do |builder| %>
+              <%= builder.hidden_field :id,
+                value: @role.decorate.function(function, route[:controller]) %>
+              <%= builder.hidden_field :model_class, value: route[:controller] %>
+              <%= builder.hidden_field :action, value: function %>
+              <td>
+                <%= builder.check_box :_destroy,
+                  {checked: @role.decorate.function(function,
+                  route[:controller]).present?}, false, true %>
+              </td>
+            <% end %>
           <% end %>
         <% end %>
       </tr>
