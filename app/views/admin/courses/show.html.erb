@@ -72,6 +72,13 @@
           </li>
         <% end %>
       </ul>
+      <h2 class="label"><%= t "layouts.evaluation_standards" %>
+        <% if policy(controller: "assign_evaluations", action: "edit") %>
+          <%= link_to edit_admin_course_assign_evaluations_path(@course) do %>
+            &nbsp;<i class="ionicons ion-plus"></i>
+          <% end %>
+        <% end %>
+      </h2>
     </div>
   </div>
 </div>

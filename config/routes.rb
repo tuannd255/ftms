@@ -17,6 +17,7 @@ Rails.application.routes.draw do
       resource :change_status_courses, only: :update
       resources :course_subjects, except: [:new, :show]
       resources :clone_courses, only: :create
+      resource :assign_evaluations, only: [:edit, :update]
     end
     resources :roles
     resources :subjects do

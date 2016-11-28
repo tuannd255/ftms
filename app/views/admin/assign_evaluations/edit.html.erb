@@ -1,0 +1,26 @@
+<div id="assign-evaluations">
+  <div class="col-md-8 col-md-offset-2">
+    <%= form_for @course, url: admin_course_assign_evaluations_path,
+      method: :patch do |f| %>
+      <%= render "shared/error_messages", object: @course %>
+      <table class="table table-striped">
+        <% @course_supports.evaluation_standards.each do |evaluation_standard| %>
+          <tr>
+            <%= f.fields_for :course_evaluations,
+              @course_supports.evaluation_standards.build do |ff| %>
+              <%= ff.hidden_field :evaluation_standard_id,
+                value: evaluation_standard.id %>
+              <td>
+                <%= ff.check_box :_destroy, {checked:
+                  @course_supports.check_evaluation(f, evaluation_standard.id)},
+                  false, true %>
+              </td>
+              <td><%= evaluation_standard.name %></td>
+            <% end %>
+          </tr>
+        <% end %>
+      </table>
+      <%= f.submit t("buttons.save"), class: "btn btn-primary pull-right" %>
+    <% end %>
+  </div>
+</div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161123081836) do
+ActiveRecord::Schema.define(version: 20161128065753) do
 
   create_table "activities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "trackable_type"
@@ -63,6 +63,22 @@ ActiveRecord::Schema.define(version: 20161123081836) do
     t.datetime "updated_at",  null: false
     t.datetime "deleted_at"
     t.index ["deleted_at"], name: "index_conversations_on_deleted_at", using: :btree
+  end
+
+  create_table "course_evaluations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "course_id"
+    t.integer  "evaluation_standard_id"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.index ["course_id"], name: "index_course_evaluations_on_course_id", using: :btree
+    t.index ["evaluation_standard_id"], name: "index_course_evaluations_on_evaluation_standard_id", using: :btree
+  end
+
+  create_table "course_subject_requirements", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "requirement_id"
+    t.integer "course_subject_id"
+    t.index ["course_subject_id"], name: "index_course_subject_requirements_on_course_subject_id", using: :btree
+    t.index ["requirement_id"], name: "index_course_subject_requirements_on_requirement_id", using: :btree
   end
 
   create_table "course_subjects", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -146,12 +162,13 @@ ActiveRecord::Schema.define(version: 20161123081836) do
 
   create_table "evaluation_standards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
-    t.float    "min_point",  limit: 24
-    t.float    "max_point",  limit: 24
-    t.float    "avarage",    limit: 24
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.float    "min_point",       limit: 24
+    t.float    "max_point",       limit: 24
+    t.float    "avarage",         limit: 24
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.datetime "deleted_at"
+    t.integer  "evaluation_type"
     t.index ["deleted_at"], name: "index_evaluation_standards_on_deleted_at", using: :btree
   end
 
@@ -306,8 +323,10 @@ ActiveRecord::Schema.define(version: 20161123081836) do
 
   create_table "project_requirements", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "project_id"
+    t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "priority"
     t.datetime "deleted_at"
     t.index ["deleted_at"], name: "index_project_requirements_on_deleted_at", using: :btree
     t.index ["project_id"], name: "index_project_requirements_on_project_id", using: :btree
@@ -315,12 +334,10 @@ ActiveRecord::Schema.define(version: 20161123081836) do
 
   create_table "projects", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.datetime "deleted_at"
-    t.integer  "{:index=>true, :foreign_key=>true}_id"
     t.index ["deleted_at"], name: "index_projects_on_deleted_at", using: :btree
-    t.index ["{:index=>true, :foreign_key=>true}_id"], name: "index_projects_on_{:index=>true, :foreign_key=>true}_id", using: :btree
   end
 
   create_table "questions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -351,13 +368,6 @@ ActiveRecord::Schema.define(version: 20161123081836) do
     t.integer  "reader_id"
     t.datetime "timestamp"
     t.index ["reader_id", "reader_type", "readable_type", "readable_id"], name: "read_marks_reader_readable_index", using: :btree
-  end
-
-  create_table "requirements", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.text    "name",                                  limit: 65535
-    t.integer "priority"
-    t.integer "{:index=>true, :foreign_key=>true}_id"
-    t.index ["{:index=>true, :foreign_key=>true}_id"], name: "index_requirements_on_{:index=>true, :foreign_key=>true}_id", using: :btree
   end
 
   create_table "results", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -634,6 +644,8 @@ ActiveRecord::Schema.define(version: 20161123081836) do
   end
 
   add_foreign_key "answers", "questions"
+  add_foreign_key "course_evaluations", "courses"
+  add_foreign_key "course_evaluations", "evaluation_standards"
   add_foreign_key "course_subjects", "courses"
   add_foreign_key "course_subjects", "projects"
   add_foreign_key "course_subjects", "subjects"
@@ -654,6 +666,7 @@ ActiveRecord::Schema.define(version: 20161123081836) do
   add_foreign_key "notifications", "users"
   add_foreign_key "profiles", "locations"
   add_foreign_key "profiles", "users"
+  add_foreign_key "project_requirements", "projects"
   add_foreign_key "questions", "subjects"
   add_foreign_key "results", "answers"
   add_foreign_key "results", "exams"

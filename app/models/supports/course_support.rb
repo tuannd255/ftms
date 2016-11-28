@@ -75,4 +75,12 @@ class Supports::CourseSupport
     @course_presenters ||=  CoursePresenter.new(courses: courses,
       namespace: @namespace, program: @program).render
   end
+
+  def evaluation_standards
+    @evaluation_standards = EvaluationStandard.all
+  end
+
+  def check_evaluation f, id
+    f.object.course_evaluations.map(&:evaluation_standard_id).include? id
+  end
 end

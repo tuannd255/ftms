@@ -12,6 +12,8 @@ class Course < ApplicationRecord
     :programming_language_id, :location_id, :program_id,
     :start_date, :end_date, documents_attributes:
     [:id, :title, :document_link, :description, :_destroy], subject_ids: []]
+  COURSE_EVALUATION_ATTRIBUTES_PARAMS = [course_evaluations_attributes:
+    [:id, :_destroy, :evaluation_standard_id]]
 
   belongs_to :programming_language
   belongs_to :location
@@ -33,6 +35,8 @@ class Course < ApplicationRecord
   has_many :documents, as: :documentable
   has_many :notifications, as: :trackable, dependent: :destroy
   has_many :messages, as: :chat_room, dependent: :destroy
+  has_many :course_evaluations, dependent: :destroy
+  has_many :evaluation_standards, through: :course_evaluations
 
   scope :recent, ->{order created_at: :desc}
   scope :active_course, ->{where status: "progress"}
@@ -45,6 +49,7 @@ class Course < ApplicationRecord
   accepts_nested_attributes_for :documents,
     reject_if: proc {|attributes| attributes["content"].blank? && attributes["id"].blank?},
     allow_destroy: true
+  accepts_nested_attributes_for :course_evaluations, allow_destroy: true
 
   enum status: [:init, :progress, :finish]
 

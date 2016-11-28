@@ -6,4 +6,6 @@ class EvaluationStandard < ApplicationRecord
   has_many :evaluation_check_lists
   has_many :trainee_evaluations, through: :evaluation_check_lists
   has_many :evaluation_items
+  has_many :course_evaluations, dependent: :destroy
+  has_many :courses, through: :course_evaluations
 end
