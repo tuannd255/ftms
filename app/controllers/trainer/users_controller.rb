@@ -12,15 +12,16 @@ class Trainer::UsersController < ApplicationController
   end
 
   def create
-    if @user.save
+    user_send_mail_service = MailerServices::UserSendMailService.new user: @user
+    if @user.save && user_send_mail_service.perform?
       flash[:success] = flash_message "created"
-
-      if params[:commit].present?
-        redirect_to trainer_training_managements_path
-      else
+      if params[:create_and_continue].present?
         redirect_to new_trainer_user_path
+      else
+        redirect_to trainer_training_managements_path
       end
     else
+      load_data
       render :new
     end
   end

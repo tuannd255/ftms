@@ -15,9 +15,9 @@ class Admin::UsersController < ApplicationController
     if @user.save && user_send_mail_service.perform?
       flash[:success] = flash_message "created"
       if params[:create_and_continue].present?
-        redirect_to admin_training_managements_path
-      else
         redirect_to new_admin_user_path
+      else
+        redirect_to admin_training_managements_path
       end
     else
       load_data
