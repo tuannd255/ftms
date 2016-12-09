@@ -144,6 +144,8 @@ function toggleFilterMenu(element, resize) {
     _left = fa.offset().left - filterDomWidth + 24;
   } else if (fa.hasClass('controller_name')) {
     _left = 470;
+  } else if (fa.hasClass('university')){
+    _left = fa.offset().left - 24;
   } else {
     $filterDom.removeClass(rightArowClass);
     _left = fa.offset().left - 12;
@@ -153,6 +155,8 @@ function toggleFilterMenu(element, resize) {
 
   if (fa.hasClass('controller_name')) {
     _top = $(".panel").offset().top - 44;
+  } else if (fa.hasClass('university')) {
+    _top = fa.offset().top - $('#tbl-universities').offset().top + 10;
   }
 
   $filterDom.css({"top": _top, "left": _left});

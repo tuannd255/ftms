@@ -2,7 +2,7 @@
 <header class="fixedTable-header" id="fixed-bottom-body">
   <div class="scroll-month">
     <% @statistics.month_ranges.each do |month| %>
-      <div class="tcell text-right text-danger
+      <div class="tcell text-right text-danger total-trainees
         total-trainees-month-<%= month.gsub('/', '-') %>">
       </div>
     <% end %>

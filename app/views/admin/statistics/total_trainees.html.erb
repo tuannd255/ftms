@@ -2,77 +2,80 @@
   <div id="main" class="clearfix">
     <div id="content">
       <div id="<%= params[:type] %>">
-        <h3 class="title">
-          <%= t "statistics.total_trainees.title" %>
-          <div class="btn-group dropdown">
-            <%= form_tag admin_statistics_page_path("total_trainees"), method: :get, id: "filter_form" do %>
-              <%= hidden_field_tag :type, params[:type] %>
-              <div class="btn-group">
-                <button class="btn btn-box-tool dropdown-toggle" data-toggle="dropdown">
-                  <strong>
-                    <%= t "statistics.total_trainees.headers.location" %>
-                    <i class="fa fa-sort-desc" aria-hidden="true"></i>
-                  </strong>
-                </button>
-                <ul class="dropdown-menu" role="menu" id="locations-checkbox">
-                  <% @statistics.load_locations.each do |location| %>
+        <div class="box box-success">
+          <h3 class="title">
+            <%= t "statistics.total_trainees.title" %>
+            <div class="btn-group dropdown">
+              <%= form_tag admin_statistics_page_path("total_trainees"),
+                method: :get, id: "filter_form" do %>
+                <%= hidden_field_tag :type, params[:type] %>
+                <div class="btn-group">
+                  <button class="btn btn-box-tool dropdown-toggle" data-toggle="dropdown">
+                    <strong>
+                      <%= t "statistics.total_trainees.headers.location" %>
+                      <i class="fa fa-sort-desc" aria-hidden="true"></i>
+                    </strong>
+                  </button>
+                  <ul class="dropdown-menu" role="menu" id="locations-checkbox">
+                    <% @statistics.load_locations.each do |location| %>
+                      <li>
+                        <%= check_box_tag "location_ids[]", location.id,
+                          checked?(params, "location_ids", location.id.to_s) %>
+                        <%= location.name %>
+                      </li>
+                    <% end %>
+                    <li class="divider"></li>
                     <li>
-                      <%= check_box_tag "location_ids[]", location.id,
-                        checked?(params, "location_ids", location.id.to_s) %>
-                      <%= location.name %>
+                      <%= submit_tag t("buttons.ok"), class: "btn btn-info" %>
                     </li>
-                  <% end %>
-                  <li class="divider"></li>
-                  <li>
-                    <%= submit_tag t("buttons.ok"), class: "btn btn-info" %>
-                  </li>
-                </ul>
-              </div>
-              <div class="btn-group">
-                <button class="btn btn-box-tool dropdown-toggle" data-toggle="dropdown">
-                  <strong>
-                    <%= t "statistics.total_trainees.headers.stage" %>
-                    <i class="fa fa-sort-desc" aria-hidden="true"></i>
-                  </strong>
-                </button>
-                <ul class="dropdown-menu" role="menu" id="stages-checkbox">
-                  <% @statistics.load_stages.each do |stage| %>
+                  </ul>
+                </div>
+                <div class="btn-group">
+                  <button class="btn btn-box-tool dropdown-toggle" data-toggle="dropdown">
+                    <strong>
+                      <%= t "statistics.total_trainees.headers.stage" %>
+                      <i class="fa fa-sort-desc" aria-hidden="true"></i>
+                    </strong>
+                  </button>
+                  <ul class="dropdown-menu" role="menu" id="stages-checkbox">
+                    <% @statistics.load_stages.each do |stage| %>
+                      <li>
+                        <%= check_box_tag "stage_ids[]", stage.id,
+                          checked?(params, "stage_ids", stage.id.to_s) %>
+                        <%= stage.name %>
+                      </li>
+                    <% end %>
+                    <li class="divider"></li>
                     <li>
-                      <%= check_box_tag "stage_ids[]", stage.id,
-                        checked?(params, "stage_ids", stage.id.to_s) %>
-                      <%= stage.name %>
+                      <%= submit_tag t("buttons.ok"), class: "btn btn-info" %>
                     </li>
-                  <% end %>
-                  <li class="divider"></li>
-                  <li>
-                    <%= submit_tag t("buttons.ok"), class: "btn btn-info" %>
-                  </li>
-                </ul>
-              </div>
-            <% end %>
+                  </ul>
+                </div>
+              <% end %>
+            </div>
+            <button id="btn-filter-on-off" title="<%= filter_title %>"
+              class="btn-filter-onoff-project btn btn-default">
+              &nbsp;
+            </button>
+            <span id="filter-loading" class="filter-loading-offset-top"></span>
+          </h3>
+
+          <div class="table">
+            <%= render "total_trainees_header" %>
+            <%= @statistics.total_trainees_presenter.html_safe %>
+            <%= render "total_trainee_number" %>
           </div>
-          <button id="btn-filter-on-off" title="<%= filter_title %>"
-            class="btn-filter-onoff-project btn btn-default">
-            &nbsp;
-          </button>
-          <span id="filter-loading" class="filter-loading-offset-top"></span>
-        </h3>
 
-        <div class="table">
-          <%= render "total_trainees_header" %>
-          <%= @statistics.total_trainees_presenter.html_safe %>
-          <%= render "total_trainee_number" %>
-        </div>
+          <div class="pull-right" id="number-records"></div>
 
-        <div class="pull-right" id="number-records"></div>
+          <div id="filter" data-filter-data="<%= @filter_service.user_filter_data %>"
+            data-type="<%= :statistics %>" data-id="<%= current_user.id %>"
+            data-is-turn-on="<%= @filter_service.is_on? %>">
+          </div>
 
-        <div id="filter" data-filter-data="<%= @filter_service.user_filter_data %>"
-          data-type="<%= :statistics %>" data-id="<%= current_user.id %>"
-          data-is-turn-on="<%= @filter_service.is_on? %>">
-        </div>
-
-        <div class="list-filters">
-          <div class="filter-form">
+          <div class="list-filters">
+            <div class="filter-form">
+            </div>
           </div>
         </div>
       </div>

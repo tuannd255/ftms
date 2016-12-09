@@ -47,9 +47,13 @@ class Supports::StatisticSupport
     @universities ||= trainee_by_university
   end
 
+  def university_presenters
+    StatisticUniversityPresenter.new(load_all_trainee_by_university).render
+  end
+
   def languages
-    @languages ||= load_languages.includes(:profiles)
-      .collect{|u| Hash[:name, u.name, :y, u.profiles.size]}.sort_by {|u| u[:y]}.reverse
+    @languages ||= load_languages.includes(:profiles).collect {|u| Hash[:name,
+      u.name, :y, u.profiles.size]}.sort_by {|u| u[:y]}.reverse
   end
 
   def month_ranges
@@ -137,8 +141,7 @@ class Supports::StatisticSupport
     universities = Array.new
     other_university = Hash[:name, I18n.t("statistics.other"), :y, 0]
 
-    list_universities = University.includes(:profiles)
-      .collect{|u| Hash[:name, u.abbreviation, :y, u.profiles.size]}
+    list_universities = load_all_trainee_by_university
     total_trainee = list_universities.sum{|u| u[:y]}
 
     list_universities.each do |university|
@@ -146,13 +149,20 @@ class Supports::StatisticSupport
       if percent <= Settings.minimum_percent_to_join
         other_university[:y] += university[:y]
       else
+        university.delete :full_name
         universities << university
           .merge(extraValue: ActionController::Base.helpers.number_to_percentage(percent))
       end
     end
-    universities = universities.sort_by {|u| u[:y]}.reverse
+
     universities << other_university
       .merge(extraValue: ActionController::Base.helpers
         .number_to_percentage(other_university[:y].to_f / total_trainee.to_f * 100))
+  end
+
+  def load_all_trainee_by_university
+    @load_all_trainee_by_university ||= University.includes(:profiles)
+      .collect{|u| Hash[:name, u.abbreviation, :y, u.profiles.size, :full_name,
+      u.name]}.sort_by {|u| u[:y]}.reverse
   end
 end

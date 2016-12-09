@@ -63,3 +63,7 @@ en:
       trainers: "Trainers"
     program: "Program"
     finish_course: "Finish course"
+    statuses:
+      init: "New"
+      progress: "Progress"
+      finish: "Finish"

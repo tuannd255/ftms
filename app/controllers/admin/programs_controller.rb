@@ -34,7 +34,7 @@ class Admin::ProgramsController < ApplicationController
   end
 
   def show
-    @supports = Supports::Course.new namespace: @namespace,
+    @supports = Supports::CourseSupport.new namespace: @namespace,
       filter_service: load_filter, program: @program
     add_breadcrumb_path "programs"
     add_breadcrumb @program.name, :admin_program_path

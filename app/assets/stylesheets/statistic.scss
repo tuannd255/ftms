@@ -1,72 +1,151 @@
 @import "variables";
 @import "mixin";
 
-#total_trainees {
+#statistics {
   @include customize-scrollbar;
 
-  .fixedTable-body {
-    height: auto;
-  }
-
-  .fixedTitle, .fixedTable-sidebar, #parent, #child {
-    width: 310px;
-  }
-
-  .tcell {
-    &.stt {
-      min-width: 35px;
-      max-width: 35px;
+  #total_trainees {
+    .fixedTable-body {
+      height: auto;
     }
 
-    &.trainee_type {
-      text-align: left;
-      text-transform: capitalize;
-      border-left: 0;
-      @include ellipsis(150px);
-      position: relative;
+    .fixedTitle, .fixedTable-sidebar, #parent, #child {
+      width: 310px;
     }
 
-    &.language{
-      @include ellipsis(125px);
-      position: relative;
-    }
-
-    &.trainee-by-month{
-      @include ellipsis(100px);
-    }
-  }
-
-  .month {
-    @include experiences-title(31px);
-    position: relative;
-  }
-
-  .all-months {
-    position: relative;
-    border-right: 1px solid #ccc;
     .tcell {
-      max-width: 80px;
-      min-width: 80px;
-      width: 80px;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      &.stt {
+        min-width: 35px;
+        max-width: 35px;
+      }
+
+      &.trainee_type {
+        text-align: left;
+        text-transform: capitalize;
+        border-left: 0;
+        @include ellipsis(150px);
+        position: relative;
+      }
+
+      &.language{
+        @include ellipsis(125px);
+        position: relative;
+      }
 
       &.trainee-by-month{
         @include ellipsis(100px);
       }
     }
-    .ft-month {
-      position: absolute;
+
+    .month {
+      @include experiences-title(31px);
+      position: relative;
     }
 
-    &.clear-both > .tcell {
-      height: 30px;
-      min-height: 30px;
-      max-height: 30px;
+    .all-months {
+      position: relative;
+      border-right: 1px solid #ccc;
+      .tcell {
+        max-width: 80px;
+        min-width: 80px;
+        width: 80px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        &.trainee-by-month{
+          @include ellipsis(100px);
+        }
+      }
+
+      .ft-month {
+        position: absolute;
+      }
+
+      &.clear-both > .tcell {
+        height: 30px;
+        min-height: 30px;
+        max-height: 30px;
+      }
+    }
+
+    .scrollbarH {
+      margin-left: 310px;
+    }
+
+    .total-trainees {
+      font-size: 16px;
     }
   }
 
-  .scrollbarH {
-    margin-left: 310px;
+  #universities {
+    .fixedTable-body {
+      height: auto;
+    }
+
+    .fixedTitle, .fixedTable-header {
+      max-height: 31px;
+      min-height: 31px;
+      height: 31px;
+    }
+
+    #fixed-bottom-body {
+      max-height: 22px;
+      min-height: 22px;
+      height: 22px;
+      .tcell {
+        max-height: 22px;
+        min-height: 22px;
+        height: 22px;
+      }
+    }
+
+    #fixed-bottom-sidebar {
+      max-height: 22px;
+      min-height: 22px;
+      height: 22px;
+    }
+
+    .tcell {
+      &.stt {
+        min-width: 35px;
+        max-width: 35px;
+      }
+
+      &.university {
+        text-align: left;
+        text-transform: capitalize;
+        border-left: 0;
+        @include ellipsis(210px);
+        position: relative;
+      }
+
+      &.number_trainees{
+        @include ellipsis(300px);
+      }
+    }
+
+    h3 {
+      margin-top: 0px;
+    }
+
+    .total-trainees {
+      font-size: 16px;
+    }
+
+  }
+
+  #tbl-universities {
+    .table {
+      min-height: 380px;
+    }
+
+    #btn-filter-on-off {
+      float: none;
+    }
+
+    #loading {
+      top: 0;
+      right: 80px;
+    }
   }
 }

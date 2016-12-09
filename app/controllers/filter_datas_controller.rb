@@ -37,109 +37,112 @@ class FilterDatasController < ApplicationController
     when "trainee_status"
       @key_field = :id
       @value_field = :status
-      @resources = Status.order(:name).pluck :name
+      @resources = Status.pluck(:name).sort!
     when "university"
       @key_field = :id
       @value_field = :universitys_name
-      @resources = University.order(:name).pluck :name
+      @resources = University.pluck(:abbreviation).sort!
     when "trainer"
       @key_field = :trainer
       @value_field = :trainer
-      @resources = User.trainers.order(:name).pluck :name
+      @resources = User.trainers.pluck(:name).sort!
     when "current_progress"
       @key_field = :current_progress
       @value_field = :current_progress
-      @resources = Subject.order(:name).pluck :name
+      @resources = Subject.pluck(:name).sort!
     when "start_training_date"
       @key_field = :start_training_date
       @value_field = :start_training_date
-      @resources = Profile.order(:start_training_date).pluck(:start_training_date).uniq.compact
+      @resources = Profile.pluck(:start_training_date).uniq.compact.sort!
     when "leave_date"
       @key_field = :leave_date
       @value_field = :leave_date
-      @resources = Profile.order(:leave_date).pluck(:leave_date).uniq.compact
+      @resources = Profile.pluck(:leave_date).uniq.compact.sort!
     when "finish_training_date"
       @key_field = :finish_training_date
       @value_field = :finish_training_date
-      @resources = Profile.order(:finish_training_date).pluck(:finish_training_date).uniq.compact
+      @resources = Profile.pluck(:finish_training_date).uniq.compact.sort!
     when "contract_date"
       @key_field = :contract_date
       @value_field = :contract_date
-      @resources = Profile.order(:contract_date).pluck(:contract_date).uniq.compact
+      @resources = Profile.pluck(:contract_date).uniq.compact.sort!
     when "ready_for_project"
       @key_field = :ready_for_project
       @value_field = :ready_for_project
-      @resources = [t("profiles.columns.ready_for_project.ready"),
-        t("profiles.columns.ready_for_project.not_ready")]
+      @resources = Profile.pluck(:ready_for_project).uniq.compact.sort!
     when "language"
       @key_field = :id
       @value_field = :language_name
       @resources = Language.pluck(:name).sort!
     when "working_day"
-      @resources = Profile.order(:working_day).pluck(:working_day).uniq.compact
+      @resources = Profile.pluck(:working_day).uniq.compact.sort!
       @blank = @type == "working_day"
       @key_field = :working_day
       @value_field = :working_day
     when "course_name"
-      @resources = Course.order(:name).pluck :name
+      @resources = Course.pluck(:name).sort!
     when "course_status"
       @resources = i18n_enum(:course, :status)
     when "course_trainers"
       @key_field = :trainer
       @value_field = :trainer
-      @resources = User.trainers.order(:name).pluck :name
+      @resources = User.trainers.pluck(:name).sort!
     when "course_start_date"
       @key_field = :start_date
       @value_field = :start_date
-      @resources = Course.order(:start_date).pluck(:start_date).uniq.compact
+      @resources = Course.pluck(:start_date).uniq.compact.sort!
     when "course_end_date"
       @key_field = :end_date
       @value_field = :end_date
-      @resources = Course.order(:end_date).pluck(:end_date).uniq.compact
+      @resources = Course.pluck(:end_date).uniq.compact.sort!
     when "subject_name"
       @key_field = :subject_name
       @value_field = :subject_name
-      @resources = Subject.order(:name).pluck :name
+      @resources = Subject.pluck(:name).sort!
     when "exam_created_at"
       @key_field = :created_at
       @value_field = :created_at
-      @resources = Exam.order(:created_at).pluck(:created_at).uniq.compact
+      @resources = Exam.pluck(:created_at).uniq.compact.sort!
     when "exam_spent_time"
       @key_field = :spent_time
       @value_field = :spent_time
-      @resources = Exam.order(:spent_time).pluck(:spent_time).uniq.compact
+      @resources = Exam.pluck(:spent_time).uniq.compact.sort!
     when "exam_score"
       @key_field = :score
       @value_field = :score
-      @resources = Exam.order(:score).pluck(:score).uniq.compact
+      @resources = Exam.pluck(:score).uniq.compact.sort!
     when "staff_code"
       @key_field = :staff_code
       @value_field = :staff_code
-      @resources = Profile.order(:staff_code).pluck(:staff_code).uniq.compact
+      @resources = Profile.pluck(:staff_code).uniq.compact.sort!
     when "stage"
       @key_field = :id
       @value_field = :stage_name
-      @resources = Stage.order(:name).pluck :name
+      @resources = Stage.pluck(:name).sort!
     when "question_content"
       @key_field = :question_content
       @value_field = :question_content
-      @resources = Question.order(:content).pluck(:content).uniq.compact
+      @resources = Question.pluck(:content).uniq.compact.sort!
     when "level"
       @resources = i18n_enum(:question, :level)
     when "controller_name"
-      @resources = Function.order(:model_class).pluck(:model_class).uniq.compact
+      @resources = Function.pluck(:model_class).uniq.compact.sort!
     when "category_name"
       @key_field = :category_name
       @value_field = :category_name
-      @resources = Category.order(:name).pluck(:name).uniq.compact
+      @resources = Category.pluck(:name).uniq.compact.sort!
     when "away_date"
       @key_field = :away_date
       @value_field = :away_date
-      @resources = Profile.order(:away_date).pluck(:away_date).uniq.compact
+      @resources = Profile.pluck(:away_date).uniq.compact.sort!
     when "comeback_date"
       @key_field = :comeback_date
       @value_field = :comeback_date
-      @resources = Profile.order(:comeback_date).pluck(:comeback_date).uniq.compact
+      @resources = Profile.pluck(:comeback_date).uniq.compact.sort!
+    when "program"
+      @key_field = :program
+      @value_field = :program
+      @resources = Program.pluck(:name).uniq.compact.sort!
     end
 
     respond_to do |format|
