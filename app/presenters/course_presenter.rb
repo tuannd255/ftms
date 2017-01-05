@@ -44,7 +44,8 @@ class CoursePresenter < ActionView::Base
       <div class=\"tcell course_trainers\">
         #{course_trainers course}
       </div>
-      <div class=\"tcell program #{"hidden" if @program}\">
+      <div class=\"tcell program #{"hidden" if @program}\"
+        data-parent_program=\'#{parent_programs course.program}\'>
         #{course.program_name}
       </div>
       <div class=\"tcell language\" title=\"#{course.language_name}\">
@@ -69,5 +70,15 @@ class CoursePresenter < ActionView::Base
       link_to trainer_course.user.name, eval("#{@namespace}_user_path(trainer_course.user)"),
         title: trainer_course.user.name
     end.join(", ")
+  end
+
+  def parent_programs program
+    list_parent = Array.new
+    if program && program.ancestors.any?
+      program.ancestors.each do |parent|
+        list_parent << parent.name.underscore
+      end
+    end
+    list_parent << program.name.underscore if program
   end
 end

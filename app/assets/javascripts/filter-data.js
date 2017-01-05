@@ -119,10 +119,27 @@ var filter_function = function(){
         cell_value = cell_value.toLowerCase();
 
         if (column.params.hasOwnProperty('select')) {
+          if (column.columnName == 'program') {
+            var cell_parent = cell_element.data('parent_program');
+            var list = column.params.select;
+            var hide_program = [];
+
+            if (list.length > 0) {
+              for(var i = 0; i < list.length; i++) {
+                hide_program += cell_parent.indexOf(list[i]) == -1;
+              }
+              hide_condition = hide_program.indexOf('false') == -1;
+            }
+          }
+          if (hide_condition) {break;};
+        }
+
+        if (column.params.hasOwnProperty('select')) {
           var list = column.params.select;
-          if (column.columnName == "course_trainers") {
+
+          if (column.columnName == 'course_trainers') {
             hide_condition = ($(list).filter(cell_value.split(", ")).length == 0);
-          } else {
+          } else if (column.columnName != 'program') {
             hide_condition = (list.indexOf(cell_value) == -1);
           }
           if (hide_condition) {break;};
@@ -151,7 +168,6 @@ var filter_function = function(){
           if (hide_condition) {break;};
         }
       };
-
       for(var row_child in row){
         if (hide_condition) {
           row[row_child].addClass('hide');
