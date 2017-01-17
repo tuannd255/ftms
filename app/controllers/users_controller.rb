@@ -9,13 +9,16 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user.build_profile unless @user.profile
+    @user_form = UserForm.new user: @user, profile: @user.profile
     add_breadcrumb @user.name, :user_path
     add_breadcrumb_edit "users"
   end
 
   def update
-    if @user.update_attributes user_params
+    @user_form = UserForm.new user: @user, profile: @user.profile
+    @user_form.assign_attributes user_params
+    @user_form.assign_password user_params
+    if @user_form.save
       sign_in @user, bypass: true
       redirect_to @user, notice: flash_message("updated")
     else

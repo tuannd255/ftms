@@ -150,9 +150,8 @@ function caculate_precent() {
     for (var i = 0 ;i < subject_size; i++){
       var size_progress_bar = $('.prog-bar').width();
       var start_width = $('#point-start-'+ j + '-' + i).width();
-      $('#point-real-'+ j + '-' + i).css('margin-left', size_progress_bar - start_width/4 + 'px');
+      $('#point-real-'+ j + '-' + i).css('margin-left', size_progress_bar - start_width + 'px');
       $('#arrow-real-'+ j + '-' + i).css('margin-left', size_progress_bar - start_width/4 + 'px');
-
       var distance = $('#spent_time' + j + i).val() - $('#expect_time' + j + i).val();
       if(distance > 0){
         var temp = $('#expect_time' + j + i).val() / $('#spent_time' + j + i).val();
