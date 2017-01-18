@@ -35,6 +35,5 @@
       (user_subject.user_end_date - user_subject.start_date).to_f %>
     <%= hidden_field_tag "expect_time"+course_index.to_s+index.to_s,
       (user_subject.end_date - user_subject.start_date).to_f %>
-    <%= hidden_field_tag "subject_size", size %>
   <% end %>
 </div>

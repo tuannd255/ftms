@@ -12,6 +12,12 @@
     </tr>
   </thead>
   <tbody>
-    <%= render @supports.user_subjects %>
+    <% @supports.user_subjects.each.with_index do |user_subject, index| %>
+      <%= render "admin/user_subjects/user_subject",
+        user_subject: user_subject,
+        user_index: index %>
+    <% end %>
   </tbody>
+  <%= hidden_field_tag "subject_size", @supports.user_subjects.size %>
+  <%= hidden_field_tag "course_size", 1 %>
 </table>

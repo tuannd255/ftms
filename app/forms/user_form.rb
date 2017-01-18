@@ -41,6 +41,11 @@ class UserForm
     setup_associations
   end
 
+  def assign_password params
+    @user.password = params[:password]
+    @user.password_confirmation = params[:password_confirmation]
+  end
+
   validate :validate_children
 
   def save

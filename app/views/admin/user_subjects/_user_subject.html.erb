@@ -48,10 +48,17 @@
     </select>
   </td>
   <td>
-    <% if user_subject.percent_progress %>
-      <%= render "shared/progress_bar", percent: user_subject.percent_progress,
-        status: user_subject.status %>
-    <% end %>
+    <div class="col-md-8 fix-cell-progress-bar">
+      <% if user_subject.percent_progress %>
+        <%= render "shared/progress_bar_date",
+          percent: user_subject.percent_progress,
+          user_subject: user_subject,
+          course_index: 0,
+          index: user_index %>
+      <% end %>
+    </div>
+    <div class="col-md-4">
+    </div>
   </td>
   <td class="evaluate">
     <span>

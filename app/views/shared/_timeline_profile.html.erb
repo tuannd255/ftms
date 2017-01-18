@@ -28,8 +28,7 @@
                     percent: user_subject.percent_progress,
                     user_subject: user_subject,
                     index: index,
-                    course_index: course_index,
-                    size: user_course.user_subjects.size %>
+                    course_index: course_index %>
                 </div>
               </div>
             </div>
@@ -88,6 +87,7 @@
           </div>
         </div>
       </li>
+      <%= hidden_field_tag "subject_size", user_course.user_subjects.size %>
     <% end %>
   </ul>
 </div>
