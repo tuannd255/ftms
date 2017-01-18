@@ -9,6 +9,7 @@ capybara-*.html
 /public/assets/
 /public/uploads
 /public/uploads/
+/public/javascripts/i18n.js
 /coverage/
 /spec/tmp
 **.orig

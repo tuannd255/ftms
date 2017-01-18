@@ -30,9 +30,10 @@ class Course < ApplicationRecord
   has_many :notifications, as: :trackable, dependent: :destroy
   has_many :messages, as: :chat_room, dependent: :destroy
 
-  validate :check_end_date, on: [:create, :update]
   validates :name, presence: true
   validates :language_id, presence: true
+
+  before_save :assign_date
 
   scope :created_between, ->start_date, end_date{where("DATE(created_at) >=
     ? AND DATE(created_at) <= ?", start_date, end_date)}
@@ -51,24 +52,6 @@ class Course < ApplicationRecord
   delegate :name, to: :location, prefix: true, allow_nil: true
   delegate :name, to: :program, prefix: true, allow_nil: true
 
-  def check_end_date
-    if start_date.present?
-      if end_date.present?
-        errors.add :end_date, I18n.t("error.wrong_end_date") if
-          end_date < start_date
-      else
-        end_date = estimate_end_date Settings.working_days
-      end
-    else
-      if end_date.present?
-        errors.add :start_date, I18n.t("error.wrong_end_date")
-      else
-        start_date = Time.zone.now
-        end_date = estimate_end_date Settings.working_days
-      end
-    end
-  end
-
   def start_course current_user
     update_attributes status: :progress
     user_courses.update_all status: :progress
@@ -81,5 +64,10 @@ class Course < ApplicationRecord
     update_current_progress = FalseCurrentProgressService.new self
     update_current_progress.perform
     create_activity key: "course.finish_course", owner: current_user
+  end
+
+  private
+  def assign_date
+    self.end_date ||= estimate_end_date Settings.working_days
   end
 end

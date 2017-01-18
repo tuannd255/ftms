@@ -14,9 +14,10 @@
       <%= @supports.member_size %>
     </span>
   </div>
-  <div class="box-body no-padding">
+  <div class="box-body">
     <%= render "shared/member_panel", show_members: @supports.users,
-      count_member: @supports.count_member %>
+      count_member: @supports.count_member,
+      trainers: trainers, trainees: trainees %>
   </div>
 </div>
 
