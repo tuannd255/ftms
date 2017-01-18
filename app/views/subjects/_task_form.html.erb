@@ -34,17 +34,20 @@
             <% user_task.pull_request_url.split(" ").each do |url| %>
             <div class="pull-requestes">
               <div class="col-md-10 task-pullurl">
-                <input type="text" class="form-control link-field"
-                  placeholder="<%= t "user_tasks.title.git_link" %>" value="<%= url %>">
+                <input type="url" class="form-control link-field"
+                  placeholder="<%= t "user_tasks.title.git_link" %>"
+                  pattern="https?://.+" value="<%= url %>">
               </div>
               <div class="col-md-1 btn-submit-pull" data-toggle="buttons">
-                <label class="btn btn-success btn-circle">
+                <label class="btn btn-success btn-circle"
+                  title="<%= t "user_tasks.label.submit_git_link" %>">
                   <input type="checkbox" value="false" name="submit">
                   <i class="fa fa-paper-plane" aria-hidden="true"></i>
                 </label>
               </div>
               <div class="col-md-1 btn-rm-pull" data-toggle="buttons">
-                <label class="btn btn-danger btn-circle">
+                <label class="btn btn-danger btn-circle"
+                  title="<%= t "user_tasks.label.remove_git_link" %>">
                   <input type="checkbox" value="false" name="remove">
                   <i class="fa fa-times" aria-hidden="true"></i>
                 </label>
@@ -54,8 +57,8 @@
           <% end %>
           <div class="pull-requestes">
             <div class="col-md-11 task-pullurl">
-              <input type="text" class="form-control link-field"
-                placeholder="<%= t "user_tasks.title.git_link" %>">
+              <input type="url" class="form-control link-field"
+                placeholder="<%= t "user_tasks.title.git_link" %>" pattern="https?://.+">
             </div>
             <div class="col-md-1 btn-rm-pull" data-toggle="buttons">
               <label class="btn btn-danger btn-circle">

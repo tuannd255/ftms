@@ -4,6 +4,9 @@ $(document).on('turbolinks:load', function(){
       e.preventDefault();
       if ($.trim($(this).val()).length) {
         var new_field = pull_url_input_field();
+        $(this).closest('.pull-requestes')
+          .find('label.btn-circle.btn-danger')
+          .attr('title', I18n.t("user_tasks.label.remove_git_link"));
         $(this).closest('div.pull-rq-field').append(new_field);
         $('input.link-field:last-child').focus();
       }
@@ -11,24 +14,17 @@ $(document).on('turbolinks:load', function(){
     }
   });
 
-  $('.update-user-task').click(function () {
+  $('body').on('click', '.update-user-task, .create-user-task', function () {
     var _form = $(this).closest('form'),
         _links = $('input.link-field', _form),
         _git_links = "",
         _pull_url = $('input.pull_urls', _form);
     $(_links).each(function () {
-      if ($.trim($(this).val()).length && check_valid_url(this.value)) {
+      if ($.trim($(this).val()).length) {
         _git_links += this.value + " ";
       }
     });
     $(_pull_url).val(_git_links);
-
-    if ($(_pull_url).val().length) {
-      return true;
-    } else {
-      $(this).closest('.modal').modal('hide');
-      return false;
-    }
   });
 
   $('body').on('click', 'a.task-action', function (e) {
@@ -109,8 +105,8 @@ $(document).on('turbolinks:load', function(){
 function pull_url_input_field(value) {
   var value = value || "";
   return "<div class='pull-requestes'><div class='col-md-11 task-pullurl'>\
-    <input type='text' class='form-control link-field' placeholder='"
-    + I18n.t("user_tasks.title.git_link") + "' value='" + value + "'></div>\
+    <input type='url' class='form-control link-field' placeholder='"
+    + I18n.t("user_tasks.title.git_link") + "' value='" + value + "' pattern='https?://.+'></div>\
     <div class='col-md-1 btn-rm-pull' data-toggle='buttons'>\
     <label class='btn btn-danger btn-circle'>\
     <input type='checkbox' value='false' name='remove'>\
