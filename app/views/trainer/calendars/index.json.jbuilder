@@ -1,6 +1,7 @@
 today = Time.current.to_date
 @trainees.each do |trainee|
-  @user_subjects = UserSubject.full_subject trainee.id
+  course_id = trainee.courses.progress.first
+  @user_subjects = UserSubject.full_subject trainee.id, course_id
   courses = trainee.courses
   json.array!(@user_subjects) do |user_subject|
     end_date = user_subject.end_date

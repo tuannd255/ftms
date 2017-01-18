@@ -27,7 +27,7 @@ class UserSubject < ApplicationRecord
   scope :not_finish, -> user_subjects {where.not(id: user_subjects)}
   scope :sort_by_course_subject, ->{joins(:course_subject).order("course_subjects.order asc")}
   scope :order_by_course_subject , ->{joins(:course_subject).order "course_subjects.row_order"}
-  scope :full_subject, -> trainee_id{where user_id: trainee_id}
+  scope :full_subject, -> trainee_id, course_id{where user_id: trainee_id, course_id: course_id}
 
   scope :load_by_course_subject, ->course_subject_ids, trainer_id do
     order_by_course_subject.joins(:user).where("course_subjects.id in (?)
