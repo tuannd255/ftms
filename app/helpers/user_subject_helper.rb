@@ -7,7 +7,7 @@ module UserSubjectHelper
     "/#{@namespace}/course_subjects/#{args[:course_subject_id]}/user_subjects/#{args[:user_subject_id]}"
   end
 
-  def disabled? course
-    course.finish? ? "disabled" : ""
+  def disabled_if course
+    course.finish? || course.init? ? "disabled" : ""
   end
 end

@@ -30,6 +30,8 @@ en:
       spent_time: "Spent time: "
       git_link: "Github: "
       sent_count: "Sent count: "
+      remove_git_link: "Remove pullrequest's link"
+      submit_git_link: "Submit pullrequest's link"
     title:
       start_date: "The beginning of the task"
       spent_time: "Spent time of the task"

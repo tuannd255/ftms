@@ -38,7 +38,7 @@
   <td>
     <select data-id="<%= url_user_subject user_subject_id: user_subject.id,
       course_subject_id: @supports.course_subject.id %>" class="stt-user-subject"
-      <%= disabled? @supports.course %>>
+      <%= disabled_if @supports.course %>>
       <% @supports.statuses.each do |status| %>
         <option value="<%= status[1] %>" <%= is_selected? user_subject, status[0] %>
           class="stt-<%= status[0] %>">
