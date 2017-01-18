@@ -1,4 +1,6 @@
 class Message < ApplicationRecord
+  include OrderScope
+
   acts_as_paranoid
 
   acts_as_readable on: :created_at

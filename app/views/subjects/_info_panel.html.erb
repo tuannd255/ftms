@@ -15,7 +15,8 @@
   </div>
   <div class="box-body">
     <%= render "shared/member_panel", show_members: @subject_supports.users,
-      count_member: @subject_supports.count_member %>
+      count_member: @subject_supports.count_member,
+      trainers: trainers, trainees: trainees %>
   </div>
 </div>
 

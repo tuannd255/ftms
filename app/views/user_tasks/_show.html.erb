@@ -25,7 +25,7 @@
       <%= l @user_task.created_at, format: :year %>
     </h5>
   </div>
-  <% if @user_task.in_progress? %>
+  <% if @user_task.progress? %>
     <div class="task_detail_button">
       <%= link_to user_task_path(@user_task,
         status: "finished"), method: :patch, remote: true do %>

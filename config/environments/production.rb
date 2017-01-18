@@ -95,7 +95,7 @@ Rails.application.configure do
     email: {
       verbose_subject: false,
       normalize_subject: true,
-      email_prefix: "[FTMS]_System-ERROR ",
+      email_prefix: "[FTMS-Education]_System-ERROR ",
       sender_address: ENV["MAILGUN_SMTP_USERNAME"],
       exception_recipients: arr << ENV["GMAIL_USERNAME"]
     }

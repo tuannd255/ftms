@@ -65,7 +65,6 @@ group :development, :test do
   gem "pry-byebug"
   gem "fabrication"
   gem "web-console", "~> 2.0"
-  gem "spring"
   gem "letter_opener"
   gem "faker"
   gem "i18n-tasks", "~> 0.8.7"
@@ -73,4 +72,8 @@ group :development, :test do
   gem "bullet"
   gem "railroady"
   gem "figaro"
+end
+
+group :test do
+  gem "spring"
 end

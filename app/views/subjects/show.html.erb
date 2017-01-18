@@ -88,7 +88,8 @@
       </div>
     </div>
     <div class="col-md-3 info-panel">
-      <%= render "info_panel" %>
+      <%= render "info_panel", trainers: @subject_supports.trainers,
+        trainees: @subject_supports.trainees %>
     </div>
   </div>
   <%= render "shared/task_modal" %>
