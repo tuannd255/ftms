@@ -54,9 +54,9 @@ class Supports::Statistics::ApplicationStatistic
         Hash[:name, u[:name], :y, 0]
       end
       @load_trainee_by_location_and_type.each do |trainee|
-        if trainee.language
+        if trainee.language && trainee.send(type_statistic)
           found_language = all_statistics.find do |u|
-            u[:name] == trainee.send("#{type_statistic}").name
+            u[:name] == trainee.send(type_statistic).name
           end
           found_language[:y] += 1
         else

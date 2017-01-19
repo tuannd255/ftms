@@ -135,6 +135,8 @@
       position: absolute;
       top: 0;
       left: 0;
+      width: 100%;
+      background-size: 100%;
       background: linear-gradient(to right, mix(violet, deepskyblue, 20%),
        mix(limegreen, yellow, 70%), yellow, orange, mix(red, deeppink, 20%));
       &:before{
@@ -152,6 +154,8 @@
       position: absolute;
       top: 0;
       left: 0;
+      width: 100%;
+      background-size: 100%;
       background: linear-gradient(to right, mix(violet, deepskyblue, 40%),
        mix(limegreen, yellow, 80%), yellow);
       &:before{
@@ -171,7 +175,6 @@
   .arrow-up {
     position:absolute;
     width: 1px;
-    background-color: white;
     margin-top: -7px;
     float: left;
     color: black;
@@ -180,7 +183,6 @@
   .arrow-down {
     position:absolute;
     width: 1px;
-    background-color: white;
     margin-top: 11px;
     float: left;
     color: black;
