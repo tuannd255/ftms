@@ -39,6 +39,7 @@ class UserForm
     profile_attributes = params.slice *self.class.profile_attributes
     profile.assign_attributes profile_attributes
     setup_associations
+    assign_password params
   end
 
   def assign_password params

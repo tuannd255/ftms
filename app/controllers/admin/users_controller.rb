@@ -37,7 +37,6 @@ class Admin::UsersController < ApplicationController
   def update
     @user_form = UserForm.new user: @user, profile: @user.profile
     @user_form.assign_attributes user_params
-    @user_form.assign_password user_params
     change_type
     if @user_form.save
       sign_in(@user, bypass: true) if current_user? @user

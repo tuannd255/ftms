@@ -86,23 +86,23 @@ class UserSubject < ApplicationRecord
   end
 
   def subject
-    course_subject.subject
+    course_subject.subject if course_subject
   end
 
   def name
-    course_subject.subject_name
+    course_subject.subject_name if course_subject
   end
 
   def description
-    course_subject.subject.description
+    course_subject.subject.description if course_subject
   end
 
   def content
-    course_subject.subject.content
+    course_subject.subject.content if course_subject
   end
 
   def image_url
-    course_subject.image_url
+    course_subject.image_url if course_subject
   end
 
   def is_of_user? user_param
