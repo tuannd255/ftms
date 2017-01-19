@@ -206,7 +206,7 @@ class User < ApplicationRecord
 
   private
   def set_password
-    if new_record? !self.password && !self.password_confirmation
+    if new_record? && !self.password && !self.password_confirmation
       self.password = Settings.default_password
       self.password_confirmation = Settings.default_password
     end

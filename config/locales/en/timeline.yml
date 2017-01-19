@@ -1,6 +1,6 @@
 en:
   timeline:
-    headline: "The Main Timeline"
-    content: "<p>This is your Timeline</p>"
+    headline: "<div class=\"text-blue\">Welcome to Framgia Trainning Management System</div>"
+    content: "<p class=\"text-white\">You don't have course</p>"
     task_finish: "Task finish"
     task_init: "Task init"

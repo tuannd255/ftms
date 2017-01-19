@@ -1,16 +1,16 @@
 json.timeline do
   json.type "default"
   if @user_subjects.any?
+    date = @user_subjects.first.start_date || user_subject.course.start_date
     json.date @user_subjects do |user_subject|
-      if user_subject.start_date
-        json.startDate l(user_subject.start_date, format: :timeline_js)
-      end
-      if user_subject.user_end_date || user_subject.end_date
-        json.endDate l(user_subject.user_end_date || user_subject.end_date,
-          format: :timeline_js)
-      end
+      json.startDate l(user_subject.start_date || date, format: :timeline_js)
+      date = user_subject.user_end_date || user_subject.end_date ||
+        date + user_subject.subject.during_time
+      json.endDate l(user_subject.user_end_date || user_subject.end_date || date,
+        format: :timeline_js)
       json.headline "#{link_to user_subject.subject.name,
-        [user_subject.trainee_course, user_subject.subject], data: {status: user_subject.status}}"
+        [user_subject.trainee_course, user_subject.subject]}<span class='hidden'
+        data-status='#{user_subject.status}'></span>"
       json.text "<div class='description'>#{user_subject.description}</div>"
       json.tag " "
       json.asset do
@@ -28,6 +28,14 @@ json.timeline do
           t("tasks.task_finish") + "</span><span class='text-primary'><br>#{user_subject.user_tasks.init.size} " +
           t("tasks.task_init") + "<span>"
       end
+    end
+  else
+    json.date [0] do
+      json.startDate l(Date.today, format: :timeline_js)
+      json.endDate l(Date.today, format: :timeline_js)
+      json.headline t "timeline.headline"
+      json.text t "timeline.content"
+      json.tag " "
     end
   end
 end

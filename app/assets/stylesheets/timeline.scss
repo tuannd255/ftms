@@ -111,4 +111,21 @@
       right: 0;
     }
   }
+
+  .finish-color {
+    color: #09C;
+  }
+
+  .init-color, .progress-color {
+    color: #fff;
+  }
+  .timenav .content .marker.active .flag .flag-content {
+    .finish-color {
+      color: #000;
+    }
+
+    .init-color, .progress-color {
+      color: #DF2;
+    }
+  }
 }
