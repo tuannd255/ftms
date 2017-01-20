@@ -18,13 +18,17 @@ $(document).on('turbolinks:load', function() {
 });
 
 var handle_data_timeline = function() {
-  $('#timeline-embed .vco-storyjs a').each(function(index) {
-    status = $(this).data('status');
-    $($('#timeline-embed .vco-timeline .vco-navigation .timenav .content .marker .flag .flag-content')[index])
-      .addClass(status + '-background-color');
-    $($('#timeline-embed .vco-timeline .vco-navigation .timenav .content .marker .flag .flag-content h3')[index])
-      .addClass(status + '-color');
-  })
+  $('.vco-timeline .vco-navigation .timenav .content .marker .flag .flag-content').each(function() {
+    status = $('span', this).data('status') == undefined ? status = 'finish' :
+      $('span', this).data('status');
+    $(this).addClass(status + '-background-color');
+    $('h3', this).addClass(status + '-color');
+  });
+  $('#timeline-embed .media').each(function() {
+    if (this.offsetHeight < this.scrollHeight) {
+      $('.text-media', this).css('border-right', 'none');
+    }
+  });
   $('#timeline-embed .vco-slider .slider-item .content .content-container .media .media-wrapper .media-container .plain-text .container .user_task').each(function() {
     if ($('.status', this).length == 0) {
       status_class = $('.task', this).data('finish') ? 'glyphicon glyphicon-check' :
