@@ -125,7 +125,7 @@ $(document).on('turbolinks:load', function() {
   load_chart();
   setbutton();
   do_exam();
-  caculate_precent();
+  caculate_percent();
 
   $('#show-more').click(function() {
     $(this).text(function(i, text){
@@ -143,7 +143,7 @@ $(document).on('ajaxComplete', function(){
   }
 });
 
-function caculate_precent() {
+function caculate_percent() {
   var course_size = $('#course_size').val();
   var subject_size = $('#subject_size').val();
   for (var j =0 ;j < course_size; j++){
@@ -188,6 +188,7 @@ function ajax_update_status() {
   });
 
   select_status.change(function() {
+    var user_index = $(this).prev().val();
     var status = $('option:selected', this).text().toLowerCase(),
         popup_body = I18n.t("notices.change_status.user_subject")
           + "<span class='label-dialog-status'>&nbsp;" + status + "&nbsp;</span>";
@@ -229,7 +230,10 @@ function ajax_update_status() {
       $.ajax({
         method: 'PATCH',
         url: $(element).data('id'),
-        data: {status: $(element).val()},
+        data: {
+          status: $(element).val(),
+          user_index: user_index
+        },
         complete: function() {
           $('#confirm-dialog').modal('hide');
         },
