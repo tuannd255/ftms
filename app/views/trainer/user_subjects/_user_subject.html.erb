@@ -9,6 +9,7 @@
       <div class="form-edit">
         <%= form_for [:trainer, @supports.course_subject, user_subject],
           remote: true do |f| %>
+          <%= hidden_field_tag :user_index, user_index %>
           <%= f.text_field :start_date, value: user_subject.start_date ?
             l(user_subject.start_date, format: :default) : "",
             class: "date-edit datepicker", readonly: true %>
@@ -24,6 +25,7 @@
       <div class="form-edit">
         <%= form_for [:trainer, @supports.course_subject, user_subject],
           remote: true do |f| %>
+          <%= hidden_field_tag :user_index, user_index %>
           <%= f.text_field :end_date, value: user_subject.end_date ?
             l(user_subject.end_date, format: :default) : "",
             class: "date-edit datepicker", readonly: true %>
@@ -36,6 +38,7 @@
     <%= l(user_subject.user_end_date, format: :default) if user_subject.user_end_date %>
   </td>
   <td>
+    <%= hidden_field_tag :user_index, user_index %>
     <select data-id="<%= url_user_subject user_subject_id: user_subject.id,
       course_subject_id: @supports.course_subject.id %>" class="stt-user-subject"
       <%= disabled_if @supports.course %>>

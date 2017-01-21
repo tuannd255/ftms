@@ -1,9 +1,10 @@
 <% if params[:user_subject].present? && @user_subject.errors.blank? %>
-  $("#user-subject-<%= @user_subject.id %>").
-    replaceWith("<%= j render @user_subject %>");
+  $("#user-subject-<%= @user_subject.id %>")
+    .replaceWith("<%= j render @user_subject, user_index: params[:user_index] %>");
 <% else %>
   $(".action").html("<%= j render "shared/action_user_subjects" %>");
   $(".user-lists").replaceWith("<%= j render "admin/subjects/user_lists" %>");
 <% end %>
+caculate_percent();
 $(".flash").html("<%= j render "shared/flash_banner" %>");
 ajax_update_status();

@@ -25,6 +25,10 @@ en:
     statuses:
       in_progress: "In Progress"
       finished: "Finished"
+      init: "Init"
+      inprogress: "In progress"
+      onhold: "On hold"
+      complete: "Complete"
     label:
       start_date: "Start date: "
       spent_time: "Spent time: "

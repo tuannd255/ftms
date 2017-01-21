@@ -54,7 +54,8 @@
           <div class="col-md-4">
             <div class="form-group">
               <%= f.label :password, t("user.fields.password") %>
-              <%= f.password_field :password, class: "form-control" %>
+              <%= f.password_field :password, class: "form-control",
+                disabled: @user_form.user.new_record? %>
             </div>
           </div>
           <div class="col-md-4">
@@ -62,7 +63,7 @@
               <%= f.label :password_confirmation,
                 t("user.place_holder.password_confirmation") %>
               <%= f.password_field :password_confirmation,
-                class: "form-control" %>
+                class: "form-control", disabled: @user_form.user.new_record? %>
             </div>
           </div>
         </div>
