@@ -33,12 +33,12 @@ $(document).on('turbolinks:load ajaxComplete', function() {
         }
       }
 
-      $('.btn-save').click(function() {
+      $('.datepicker-dropdown').on('click', '.btn-save', function() {
         select_date.parents('form').submit();
         select_date.datepicker('hide');
       });
 
-      $('.btn-cancel').click(function() {
+      $('.datepicker-dropdown').on('click', '.btn-cancel', function() {
         select_date.datepicker('hide');
         cleardate(select_date);
       });

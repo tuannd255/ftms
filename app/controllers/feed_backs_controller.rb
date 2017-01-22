@@ -4,7 +4,6 @@ class FeedBacksController < ApplicationController
   def create
     @feed_back = if user_signed_in?
       current_user.feed_backs.new feed_back_params
-      # authorize_with_multiple page_params.merge(record: @feed_back), FeedBackPolicy
     else
       FeedBack.new feed_back_params
     end
