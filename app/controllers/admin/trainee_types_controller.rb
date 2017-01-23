@@ -28,9 +28,9 @@ class Admin::TraineeTypesController < ApplicationController
   end
 
   def edit
-    add_breadcrumb_path "trainee_type"
+    add_breadcrumb_path "trainee_types"
     add_breadcrumb @trainee_type.name
-    add_breadcrumb_edit "trainee_type"
+    add_breadcrumb_edit "trainee_types"
   end
 
   def update
@@ -60,7 +60,7 @@ class Admin::TraineeTypesController < ApplicationController
   def load_trainee_type
     @trainee_type = TraineeType.find_by id: params[:id]
     unless @trainee_type
-      redirect_to admin_user_trainee_types_path
+      redirect_to admin_trainee_types_path
       flash[:alert] = flash_message "not_find"
     end
   end

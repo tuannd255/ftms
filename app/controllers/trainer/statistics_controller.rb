@@ -1,7 +1,7 @@
 class Trainer::StatisticsController < ApplicationController
   include FilterData
 
-  before_action :authorize, except: :show
+  before_action :authorize
   before_action :load_statistic_view
   before_action :load_filter, only: :show
 

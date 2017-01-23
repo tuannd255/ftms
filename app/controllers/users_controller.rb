@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
-  before_action :authorize_user
   before_action :load_university, only: :edit
   before_action :find_user
+  before_action :authorize_user
   before_action :load_data, only: :show
 
   def show

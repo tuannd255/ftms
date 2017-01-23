@@ -12,7 +12,8 @@
         <tr>
           <td><%= index %></td>
           <td>
-            <%= link_to feed_back.user_name, trainer_user_path(feed_back.user) %>
+            <%= link_to feed_back.user_name,
+              trainer_user_path(feed_back.user) if feed_back.user %>
           </td>
           <td><%= feed_back.content %></td>
         </tr>

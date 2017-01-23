@@ -1,4 +1,5 @@
 class Admin::DashboardController < ApplicationController
+  before_action :authorize
 
   def index
     authorize_with_multiple page_params, Admin::UserFunctionPolicy
