@@ -22,6 +22,9 @@ class TagsController < ApplicationController
 
   def load_tag
     tag = Tag.find_by name: params[:id]
-    redirect_if_object_nil tag
+    unless tag
+      flash[:alert] = flash_message "not_find"
+      redirect_to posts_path
+    end
   end
 end
