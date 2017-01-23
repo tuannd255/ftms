@@ -1,4 +1,5 @@
 class Trainer::CourseSubjectsController < ApplicationController
+  before_action :authorize
   before_action :load_course, except: :new
   before_action :load_course_subject
 

@@ -1,4 +1,5 @@
 class Trainer::TaskMastersController < ApplicationController
+  before_action :authorize
   before_action :find_subject, only: :index
 
   def index

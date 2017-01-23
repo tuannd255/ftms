@@ -61,7 +61,7 @@ class Trainer::TraineeTypesController < ApplicationController
   def load_trainee_type
     @trainee_type = TraineeType.find_by id: params[:id]
     unless @trainee_type
-      redirect_to trainer_user_trainee_types_path
+      redirect_to trainer_trainee_types_path
       flash[:alert] = flash_message "not_find"
     end
   end

@@ -1,5 +1,6 @@
 class Admin::AssignProjectsController < ApplicationController
   before_action :load_data
+  before_action :authorize
 
   def update
     if params[:course_subject] && @course_subject.update_project_assign(course_subject_params)

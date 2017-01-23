@@ -1,4 +1,5 @@
 class Admin::SynchronizesController < ApplicationController
+  before_action :authorize
   before_action :init_google_drive, only: [:index]
 
   def index
