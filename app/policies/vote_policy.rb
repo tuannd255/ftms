@@ -1,7 +1,7 @@
-class MessagePolicy < ApplicationPolicy
+class VotePolicy < ApplicationPolicy
   include PolicyObject
 
   def destroy?
-    @user == @record.voter
+    @user.voted_for? @record
   end
 end
