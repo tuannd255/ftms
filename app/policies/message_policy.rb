@@ -1,4 +1,4 @@
-class UserFunctionPolicy < ApplicationPolicy
+class MessagePolicy < ApplicationPolicy
   include PolicyObject
 
   def update?

@@ -1,13 +1,13 @@
 class CoursesController < ApplicationController
-  before_action :load_course, only: [:index]
+  before_action :authorize
+  before_action :load_user_courses
 
   def index
-    authorize_with_multiple page_params.merge(record: current_user), CoursePolicy
     add_breadcrumb_path "courses"
   end
 
   private
-  def load_course
+  def load_user_courses
     @user_courses = current_user.user_courses.course_not_init
       .includes course: :language
   end

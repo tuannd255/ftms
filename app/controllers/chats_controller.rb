@@ -1,4 +1,6 @@
 class ChatsController < ApplicationController
+  before_action :authorize
+
   def index
     @users = User.ransack(name_cont: params[:q]).result
       .per_page_kaminari(params[:page]).per Settings.chats.chat_room_per_page

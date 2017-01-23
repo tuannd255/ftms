@@ -1,3 +1,3 @@
 class Admin::LanguagePolicy < ApplicationPolicy
-  include PolicyObject
+  include AdminPolicyObject
 end

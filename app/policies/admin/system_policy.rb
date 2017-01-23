@@ -1,3 +1,3 @@
 class SystemPolicy < ApplicationPolicy
-  include PolicyObject
+  include AdminPolicyObject
 end

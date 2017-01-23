@@ -1,4 +1,4 @@
 class Admin::TaskPolicy < ApplicationPolicy
-  include PolicyObject
+  include AdminPolicyObject
 end
 

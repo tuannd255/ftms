@@ -1,3 +1,3 @@
 class Admin::ImportPolicy < ApplicationPolicy
-  include PolicyObject
+  include AdminPolicyObject
 end

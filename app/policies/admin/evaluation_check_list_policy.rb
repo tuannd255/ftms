@@ -1,3 +1,3 @@
 class Admin::EvaluationCheckListPolicy < ApplicationPolicy
-  include PolicyObject
+  include AdminPolicyObject
 end

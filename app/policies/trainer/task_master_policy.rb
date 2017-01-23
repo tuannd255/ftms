@@ -1,3 +1,3 @@
 class Trainer::TaskMasterPolicy < ApplicationPolicy
-  include PolicyObject
+  include TrainerPolicyObject
 end

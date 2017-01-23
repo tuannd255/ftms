@@ -1,3 +1,3 @@
 class Trainer::UserCoursePolicy < ApplicationPolicy
-  include PolicyObject
+  include TrainerPolicyObject
 end

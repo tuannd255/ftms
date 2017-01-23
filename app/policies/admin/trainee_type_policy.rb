@@ -1,3 +1,3 @@
 class Admin::TraineeTypePolicy < ApplicationPolicy
-  include PolicyObject
+  include AdminPolicyObject
 end

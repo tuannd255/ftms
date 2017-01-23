@@ -1,3 +1,3 @@
 class Admin::ChangeRolePolicy < ApplicationPolicy
-  include PolicyObject
+  include AdminPolicyObject
 end

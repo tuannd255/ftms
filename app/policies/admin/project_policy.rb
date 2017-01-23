@@ -1,3 +1,3 @@
 class Admin::ProjectPolicy < ApplicationPolicy
-  include PolicyObject
+  include AdminPolicyObject
 end

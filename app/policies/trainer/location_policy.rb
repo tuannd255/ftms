@@ -1,3 +1,3 @@
 class Trainer::LocationPolicy < ApplicationPolicy
-  include PolicyObject
+  include TrainerPolicyObject
 end

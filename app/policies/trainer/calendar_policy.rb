@@ -1,3 +1,3 @@
 class Trainer::CalendarPolicy < ApplicationPolicy
-  include PolicyObject
+  include TrainerPolicyObject
 end

@@ -38,6 +38,7 @@ class SessionsController < Devise::SessionsController
       }
     end
   end
+
   private
   def log_sign_in
     current_user.track_logs.create signin_time: Time.zone.now,

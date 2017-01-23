@@ -1,12 +1,8 @@
 class UserTaskPolicy < ApplicationPolicy
   include PolicyObject
 
-  def index?
-    true
-  end
-
   def show?
-    true
+    @user == @record.user
   end
 
   def update?
@@ -14,6 +10,6 @@ class UserTaskPolicy < ApplicationPolicy
   end
 
   def destroy?
-    !@user.is_a?(Trainee) || @user == @record.user
+    @user == @record.user
   end
 end

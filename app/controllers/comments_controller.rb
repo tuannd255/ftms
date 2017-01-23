@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  before_action :authorize, except: [:edit, :update, :destroy]
   before_action :load_post
   before_action :load_comment, only: [:edit, :update, :destroy]
   before_action :load_supports, except: [:destroy, :show]

@@ -1,3 +1,3 @@
 class Trainer::RankPolicy < ApplicationPolicy
-  include PolicyObject
+  include TrainerPolicyObject
 end

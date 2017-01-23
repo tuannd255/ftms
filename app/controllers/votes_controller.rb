@@ -1,4 +1,5 @@
 class VotesController < ApplicationController
+  before_action :authorize, except: :destroy
   before_action :check_voteable, only: [:create, :destroy]
 
   def create
@@ -9,6 +10,7 @@ class VotesController < ApplicationController
   end
 
   def destroy
+    authorize_with_multiple page_params.merge(record: @voteable), VotePolicy
     @voteable.send "unvote_by", current_user
     respond_to do |format|
       format.js

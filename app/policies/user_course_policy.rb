@@ -1,7 +1,7 @@
-class SubjectPolicy < ApplicationPolicy
+class UserCoursePolicy < ApplicationPolicy
   include PolicyObject
 
-  def update?
+  def show?
     @user == @record.user
   end
 end

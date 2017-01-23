@@ -1,3 +1,3 @@
 class Trainer::OrganizationChartPolicy < ApplicationPolicy
-  include PolicyObject
+  include TrainerPolicyObject
 end

@@ -1,5 +1,6 @@
 class FilterDatasController < ApplicationController
   include FilterHelper
+
   before_action :load_filter, only: [:index]
   before_action :load_dates
 

@@ -1,3 +1,3 @@
 class Trainer::NotePolicy < ApplicationPolicy
-  include PolicyObject
+  include TrainerPolicyObject
 end

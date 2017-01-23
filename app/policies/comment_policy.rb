@@ -1,16 +1,8 @@
 class CommentPolicy < ApplicationPolicy
   include PolicyObject
 
-  def index?
-    true
-  end
-
   def create?
-    true
-  end
-
-  def show?
-    true
+    !@user.is_a? Admin
   end
 
   def update?

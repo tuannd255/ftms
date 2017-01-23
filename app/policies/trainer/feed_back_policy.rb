@@ -1,3 +1,3 @@
 class Trainer::FeedBackPolicy < ApplicationPolicy
-  include PolicyObject
+  include TrainerPolicyObject
 end

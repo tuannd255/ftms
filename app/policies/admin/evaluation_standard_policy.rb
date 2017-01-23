@@ -1,3 +1,3 @@
 class Admin::EvaluationStandardPolicy < ApplicationPolicy
-  include PolicyObject
+  include AdminPolicyObject
 end

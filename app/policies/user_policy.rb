@@ -1,11 +1,11 @@
 class UserPolicy < ApplicationPolicy
   include PolicyObject
 
-  def show?
-    true
+  def create?
+    false
   end
 
   def update?
-    !@user.is_a?(Trainee) || @user == @record
+    @user == @record
   end
 end

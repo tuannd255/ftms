@@ -1,3 +1,3 @@
 class Trainer::AssignTraineePolicy < ApplicationPolicy
-  include PolicyObject
+  include TrainerPolicyObject
 end
