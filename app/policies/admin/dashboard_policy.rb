@@ -1,3 +1,3 @@
 class Admin::DashboardPolicy < ApplicationPolicy
-  include PolicyObject
+  include AdminPolicyObject
 end

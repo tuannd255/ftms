@@ -1,4 +1,5 @@
 class ExamsController < ApplicationController
+  before_action :authorize, except: [:show, :update]
   before_action :find_exam, only: [:show, :update]
   before_action :load_exams, only: :index
 

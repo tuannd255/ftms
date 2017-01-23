@@ -1,4 +1,5 @@
 class TasksController < ApplicationController
+  before_action :authorize, except: [:update]
   before_action :load_task, only: [:update, :destroy]
   before_action :load_user_subject_in_course, only: [:edit, :update, :destroy]
   before_action :load_user_course, only: [:edit, :destroy]

@@ -1,3 +1,3 @@
 class Admin::FeedBackPolicy < ApplicationPolicy
-  include PolicyObject
+  include AdminPolicyObject
 end

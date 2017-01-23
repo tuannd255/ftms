@@ -1,4 +1,5 @@
 class MessagesController < ApplicationController
+  before_action :authorize
   before_action :message_of_correct_user, only: [:destroy, :update]
   before_action :load_chat_room, only: :new
   before_action :find_active_room, except: :new

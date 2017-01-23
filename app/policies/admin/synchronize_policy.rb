@@ -1,3 +1,3 @@
 class Admin::SynchronizePolicy < ApplicationPolicy
-  include PolicyObject
+  include AdminPolicyObject
 end

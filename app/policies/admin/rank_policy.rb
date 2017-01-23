@@ -1,3 +1,3 @@
 class Admin::RankPolicy < ApplicationPolicy
-  include PolicyObject
+  include AdminPolicyObject
 end

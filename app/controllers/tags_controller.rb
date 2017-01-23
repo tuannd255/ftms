@@ -1,4 +1,5 @@
 class TagsController < ApplicationController
+  before_action :authorize
   before_action :load_tag, only: :show
   before_action :load_supports, only: :show
 

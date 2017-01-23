@@ -1,6 +1,7 @@
 class Trainer::ExamsController < ApplicationController
   include FilterData
-  before_action :authorize, only: :index
+
+  before_action :authorize
   before_action :load_filter, only: :index
 
   def index

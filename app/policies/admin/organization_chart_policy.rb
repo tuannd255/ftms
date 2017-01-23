@@ -1,3 +1,3 @@
 class Admin::OrganizationChartPolicy < ApplicationPolicy
-  include PolicyObject
+  include AdminPolicyObject
 end

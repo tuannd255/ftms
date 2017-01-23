@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  before_action :authorize, except: [:edit, :update, :destroy]
   before_action :load_post, except: [:index, :new, :create]
   before_action :load_supports, only: [:index, :show]
   before_action :authorize_post, only: [:edit, :update, :destroy]

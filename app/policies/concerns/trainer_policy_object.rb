@@ -1,7 +1,7 @@
-module PolicyObject
+module TrainerPolicyObject
   Settings.functions.each do |function_name|
     define_method "#{function_name}?" do
-      @user.is_a? Trainee
+      !@user.is_a?(Trainee)
     end
   end
 

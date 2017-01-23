@@ -1,3 +1,3 @@
 class Trainer::DashboardPolicy < ApplicationPolicy
-  include PolicyObject
+  include TrainerPolicyObject
 end

@@ -1,3 +1,3 @@
 class Trainer::EvaluationTemplatePolicy < ApplicationPolicy
-  include PolicyObject
+  include TrainerPolicyObject
 end

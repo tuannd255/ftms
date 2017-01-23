@@ -1,3 +1,3 @@
 class Trainer::CloneCoursePolicy < ApplicationPolicy
-  include PolicyObject
+  include TrainerPolicyObject
 end

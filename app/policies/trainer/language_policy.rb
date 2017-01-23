@@ -1,3 +1,3 @@
 class Trainer::LanguagePolicy < ApplicationPolicy
-  include PolicyObject
+  include TrainerPolicyObject
 end

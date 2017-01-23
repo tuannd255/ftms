@@ -14,9 +14,9 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for resource
     if current_user.nil?
       root_path
-    elsif current_user.is_admin?
+    elsif current_user.is_a? Admin
       admin_root_path
-    elsif current_user.is_trainer?
+    elsif current_user.is_a? Trainer
       trainer_root_path
     else
       root_path

@@ -1,3 +1,3 @@
 class Trainer::StatisticPolicy < ApplicationPolicy
-  include PolicyObject
+  include TrainerPolicyObject
 end

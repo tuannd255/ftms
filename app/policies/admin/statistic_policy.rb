@@ -1,3 +1,3 @@
 class Admin::StatisticPolicy < ApplicationPolicy
-  include PolicyObject
+  include AdminPolicyObject
 end

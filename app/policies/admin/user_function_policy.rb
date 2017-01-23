@@ -5,7 +5,6 @@ class Admin::UserFunctionPolicy < ApplicationPolicy
     @user = user
     @controller_name = args[:controller]
     @action = args[:action]
-    @user_functions = args[:user_functions]
     @record = args[:record]
   end
 
