@@ -1,3 +1,3 @@
 class MoveStage::UserPolicy < ApplicationPolicy
-  include PolicyObject
+  include TrainerPolicyObject
 end
