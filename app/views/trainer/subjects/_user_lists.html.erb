@@ -13,7 +13,7 @@
   </thead>
   <tbody>
     <% @supports.user_subjects.each.with_index do |user_subject, index| %>
-      <%= render "admin/user_subjects/user_subject",
+      <%= render "trainer/user_subjects/user_subject",
         user_subject: user_subject,
         user_index: index %>
     <% end %>
