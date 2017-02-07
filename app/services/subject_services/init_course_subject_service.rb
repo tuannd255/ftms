@@ -28,7 +28,7 @@ class SubjectServices::InitCourseSubjectService
 
   def create_tasks
     @subject.task_masters.each do |task_master|
-      Task.create course_subject_id: @course_subjectid, name: task_master.name,
+      Task.create course_subject_id: @course_subject.id, name: task_master.name,
         description: task_master.description, task_master_id: task_master.id
     end
   end
