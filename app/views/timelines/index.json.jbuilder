@@ -1,7 +1,7 @@
 json.timeline do
   json.type "default"
   if @user_subjects.any?
-    date = @user_subjects.first.start_date || user_subject.course.start_date
+    date = @user_subjects.first.start_date || @user_subjects.first.course.start_date
     json.date @user_subjects do |user_subject|
       json.startDate l(user_subject.start_date || date, format: :timeline_js)
       date = user_subject.user_end_date || user_subject.end_date ||
