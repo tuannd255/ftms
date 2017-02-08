@@ -1,9 +1,6 @@
 $('.flash').html('<%= j render "layouts/flash" %>');
 $('.task-infor').html('<%= j render "subjects/task_statistic" %>');
 $('.user-subjects-charts').html('<%= j render "subjects/user_subject_charts" %>');
-$('#user_task').html('<%= j render "to_do_lists/user_task" %>');
-$('#task_finished').html('<%= j render "to_do_lists/user_task_was_finished" %>');
-$('#task_finished_on_day').html('<%= j render "to_do_lists/user_task_do_by_day" %>');
 $('.priority.priority-<%= @user_task.id %>').
   html('<em class="priority-<%= @user_task.status %>" title="<%= @user_task.status %>"> <%= @user_task.status %> </em>');
 $('.ul-task-action-<%= @user_task.id %>').html('<%= j raw (user_task_action @user_task.status) %>');

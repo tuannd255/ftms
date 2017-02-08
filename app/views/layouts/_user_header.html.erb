@@ -44,12 +44,6 @@
 
         <ul class="nav navbar-nav navbar-right">
           <% if user_signed_in? %>
-            <li>
-              <%= link_to "#", data: {toggle: "modal", target: "#list_task"},
-                title: t("user-header.todolist") do %>
-                <i class="fa fa-tasks"></i>
-              <% end %>
-            </li>
             <li class="dropdown messages-menu">
               <%= link_to update_notifications_path, class: "dropdown-toggle",
                 data: {toggle: "dropdown"}, method: :patch, remote: true,

@@ -7,14 +7,6 @@ module ApplicationData
     @namespace = current_user.try(:current_role_type) || "trainee"
   end
 
-  def to_do_lists
-    @to_do_lists = if user_signed_in? && current_user.role_type_avaiable.first == "trainee"
-      current_user.user_tasks.includes :user_subject
-    else
-      Array.new
-    end
-  end
-
   def notifications
     @notifications = current_user.user_notifications
       .includes(notification: [:user, :trackable])

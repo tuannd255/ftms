@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_action :authenticate_user!, except: :home
-  before_action :set_locale, :load_namespace, :init_feedback, :to_do_lists, :notifications
+  before_action :set_locale, :load_namespace, :init_feedback, :notifications
 
   protected
   def after_sign_in_path_for resource
