@@ -222,11 +222,11 @@ function ajax_update_status() {
     $('#confirm-dialog').modal('show');
     element = this;
 
-    $('#cancel-update-status').click(element, function() {
+    $('.content').on('click', '#cancel-update-status', element, function() {
       reset_select_status(element);
     });
 
-    $('#submit-update-status').click(element, function() {
+    $('.content').on('click', '#submit-update-status', element, function() {
       $.ajax({
         method: 'PATCH',
         url: $(element).data('id'),
