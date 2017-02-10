@@ -21,7 +21,7 @@ class Trainer::CoursesController < ApplicationController
   end
 
   def create
-    @course = Course.new course_params
+    @course = current_user.created_courses.build course_params
 
     course_form = CourseForm.new @course
     if course_form.validate course_params
