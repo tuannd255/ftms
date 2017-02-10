@@ -1,3 +1,13 @@
+<h2 class="label"><%= t "courses.creator" %></h2>
+<ul>
+  <li class="label-user">
+    <%= link_to [@namespace, @course.creator], title: @course.creator_name do %>
+      <%= avatar_user_tag @course.creator,
+        "profile-trainer img-circle", Settings.image_size_50 %>
+        <%= @course.creator_name %>
+    <% end %>
+  </li>
+</ul>
 <h2 class="label"><%= t "courses.labels.trainer" %>
   (<%= @course.trainers.size %>)&nbsp;
   <% unless @course.finish? %>

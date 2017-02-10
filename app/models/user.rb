@@ -95,9 +95,9 @@ class User < ApplicationRecord
   has_many :user_tasks, dependent: :destroy
   has_many :user_subjects, dependent: :destroy
   has_many :exams, dependent: :destroy
-
   has_many :active_note, class_name: Note.name, foreign_key: :author_id
   has_many :passive_note, class_name: Note.name, foreign_key: :user_id
+  has_many :created_courses, class_name: Course.name, foreign_key: :creator_id
 
   validates :name, presence: true, uniqueness: true
   validates_confirmation_of :password

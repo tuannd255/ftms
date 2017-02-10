@@ -4,7 +4,7 @@ module ApplicationData
   end
 
   def load_namespace
-    @namespace = current_user.try(:current_role_type) || "trainee"
+    @namespace = current_user.class.name.downcase
   end
 
   def notifications

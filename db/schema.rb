@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170117100236) do
+ActiveRecord::Schema.define(version: 20170210041817) do
 
   create_table "activities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "trackable_type"
@@ -150,6 +150,7 @@ ActiveRecord::Schema.define(version: 20170117100236) do
     t.integer  "location_id"
     t.datetime "deleted_at"
     t.integer  "program_id"
+    t.integer  "creator_id"
     t.index ["deleted_at"], name: "index_courses_on_deleted_at", using: :btree
     t.index ["program_id"], name: "index_courses_on_program_id", using: :btree
   end
