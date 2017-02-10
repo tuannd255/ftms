@@ -16,6 +16,7 @@ class Course < ApplicationRecord
   belongs_to :language
   belongs_to :location
   belongs_to :program
+  belongs_to :creator, class_name: User.name, foreign_key: :creator_id
 
   has_many :activities, as: :trackable, class_name: "PublicActivity::Activity", dependent: :destroy
   has_many :course_subjects, dependent: :destroy
@@ -51,6 +52,7 @@ class Course < ApplicationRecord
   delegate :name, to: :language, prefix: true, allow_nil: true
   delegate :name, to: :location, prefix: true, allow_nil: true
   delegate :name, to: :program, prefix: true, allow_nil: true
+  delegate :name, to: :creator, prefix: true, allow_nil: true
 
   def start_course current_user
     update_attributes status: :progress

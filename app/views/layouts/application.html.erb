@@ -28,8 +28,7 @@
         </div>
       </div>
     </body>
-  <% elsif user_signed_in? &&
-    (@namespace == "trainer" || @namespace == "admin") %>
+  <% elsif user_signed_in? && !(current_user.is_a? Trainee) %>
     <body id="body-admin" class="skin-blue sidebar-mini wysihtml5-supported" >
       <div class="wrapper">
         <%= render "layouts/#{@namespace}_sidebar" %>

@@ -1,16 +1,5 @@
 <div class="navbar-custom-menu">
   <ul class="nav navbar-nav">
-    <% if current_user.role_type_avaiable.any? %>
-      <% current_user.role_type_avaiable.each do |role| %>
-        <% unless role == @namespace %>
-          <li>
-            <%= link_to change_current_role_type_path(role), method: :patch do %>
-              <%= role.capitalize %>
-            <% end %>
-          </li>
-        <% end %>
-      <% end %>
-    <% end %>
     <li>
       <%= link_to chats_path do %>
         <i class="fa fa-weixin" aria-hidden="true"></i>
