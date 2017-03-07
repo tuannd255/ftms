@@ -33,14 +33,14 @@ $(document).on('turbolinks:load', function(){
     var user_task_row = $(this).closest('.task.user-task-row'),
         action = $(this).data('action'),
         task_name = $('strong.task-name', user_task_row).text();
-    $('.pull-rq-field .btn-rm-pull .btn-circle').on('click', function () {
+    $('body').on('click', '.pull-rq-field .btn-rm-pull .btn-circle',function () {
       var parent_pull_rq = $(this).closest('div.pull-rq-field');
       if (parent_pull_rq.find('div.pull-requestes').length > 1) {
         $(this).closest('div.pull-requestes').remove();
       }
     });
 
-    $('.pull-rq-field .btn-submit-pull .btn-circle').on('click', function () {
+    $('body').on('click', '.pull-rq-field .btn-submit-pull .btn-circle',function () {
       var pull_rq = $(this).closest('div.pull-requestes').find('input.link-field').val(),
           _that = this,
           _url = $(this).closest('div.task.user-task-row').data('task');
@@ -60,7 +60,15 @@ $(document).on('turbolinks:load', function(){
       $('#user-task-'+ str).modal('show');
 
     } else if (action === "delete") {
-
+      str = user_task_row[0].id;
+      str = str.slice(4, str.length);
+      $.ajax({
+        url: "http://localhost:3000/en/user_tasks/" + str,
+        method: "delete"
+      }).done(function() {
+        console.log(this);
+        $("#row-"+str).remove();
+      });
     } else {
       var popup_object = {
         id: user_task_row.attr('id'),

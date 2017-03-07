@@ -1,0 +1,18 @@
+<div id="trainee-modal-course-subject-<%= course_subject.id %>" 
+  class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h3 class="label-modal"><%= t "subjects.modal.member_details" %></h3>
+      </div>
+      <div class="modal-body info-panel">
+        <div class="member-title"><%= t "subjects.modal.trainees" %></div>
+        <ul class="user-list clearfix">
+          <%= render partial: "shared/trainee",
+            collection: course_subject.user_subjects.progress.collect{|u| u.user}, 
+            as: :user %></ul>
+      </div>
+    </div>
+  </div>
+</div>
