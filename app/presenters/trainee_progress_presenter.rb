@@ -39,7 +39,7 @@ class TraineeProgressPresenter < ActionView::Base
   end
 
   def body_item trainee, index
-    last_course = trainee.user_courses.find {|user_course| user_course.progress?}
+    last_course = trainee.trainee_courses.find {|trainee_course| trainee_course.progress?}
     html = "<div class=\"trow #{"list_#{index}"}\" id=\"body-row-#{trainee.id}\">"
     courses_html = ""
     if last_course

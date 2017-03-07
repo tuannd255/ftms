@@ -48,7 +48,7 @@ class CoursePresenter < ActionView::Base
       <div class=\"tcell program #{"hidden" if @program && @program.leaf?}\"
         data-parent_program=\'#{parent_programs course.program}\'>
         #{link_to course.program_name,
-          eval("#{@namespace}_program_path(course.program)") if course.program}
+          (@namespace == "admin" ? admin_program_path(course.program) : "#") if course.program}
       </div>
       <div class=\"tcell language\" title=\"#{course.language_name}\">
         #{course.language_name}

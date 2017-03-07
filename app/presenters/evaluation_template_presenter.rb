@@ -40,15 +40,11 @@ class EvaluationTemplatePresenter < ActionView::Base
   end
 
   def body_item evaluation_template, index
-    html = "<div class=\"trow #{"list_#{index}" }\"
-      id=\"body-row-#{evaluation_template.id}\">
+    html = "
+    <div class=\"trow #{"list_#{index}" }\" id=\"body-row-#{evaluation_template.id}\">
       <div class=\"tcell action-edit\">
         #{link_to t("buttons.edit"),
-        eval("edit_#{@namespace}_evaluation_template_path(evaluation_template)")}
-      </div>
-      <div class=\"tcell action-delete\">
-        #{link_to t("buttons.delete"),
-        eval("edit_#{@namespace}_evaluation_template_path(evaluation_template)")}
+          eval("edit_#{@namespace}_evaluation_template_path(evaluation_template)")}
       </div>
       <div class=\"tcell blank\"></div>
     </div>"
