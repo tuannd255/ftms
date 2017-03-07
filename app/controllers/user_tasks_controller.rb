@@ -25,9 +25,22 @@ class UserTasksController < ApplicationController
         url: params[:pull_url]
       room_id = @user_task.user_subject.course_subject_chatwork_room_id
       @user_task.send_message_chatwork users: users, message: message, room_id: room_id
+    elsif task_params[:name] || task_params[:description]
+      @user_task.update_attributes task_params
     end
     load_data
     respond_to do |format|
+      format.js
+      format.json do
+        render json: {status: 200}
+      end
+    end
+  end
+
+  def destroy
+    user_task = UserTask.find params[:id]
+    respond_to do |format|
+      user_task.destroy
       format.js
       format.json do
         render json: {status: 200}
@@ -44,5 +57,9 @@ class UserTasksController < ApplicationController
 
   def authorize_user_task
     authorize_with_multiple page_params.merge(record: @user_task), UserTaskPolicy
+  end
+
+  def task_params
+    params.require(:task).permit :name, :description
   end
 end

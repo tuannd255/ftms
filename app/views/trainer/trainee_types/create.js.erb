@@ -5,6 +5,6 @@
     .attr("value", <%= @trainee_type.id %>)
     .text("<%= @trainee_type.name %>")
     .prop("selected", true));
-  $("#usertype-modal").modal("hide");
+  $("#traineetype-modal").modal("hide");
   $(".flash").html("<%= j render "layouts/flash" %>");
 <% end %>

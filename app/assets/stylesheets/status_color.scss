@@ -18,7 +18,7 @@ $fail_color: RED;
   border: 1px solid $init_color;
 }
 
-.progress-color, .in_progress-color {
+.progress-color, .in_progress-color, .inprogress-color {
   color: $progress_color;
 }
 
@@ -47,7 +47,7 @@ $fail_color: RED;
 }
 
 
-.finish-color, .finished-color {
+.finish-color, .finished-color, .complete-color {
   color: $finish_color;
 }
 
