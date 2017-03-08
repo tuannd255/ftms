@@ -3,6 +3,8 @@ class MoveStage::UsersController < ApplicationController
   before_action :find_user, except: [:index, :new, :create]
 
   def edit
+    add_breadcrumb @user.name, [:admin, @user]
+    add_breadcrumb_edit "users"
     @user_form = UserForm.new user: @user, profile: @user.profile
     @supports = Supports::StageSupport.new(profile: @user.profile,
       stage: @user.profile.stage, user_form: @user_form) if params[:id]

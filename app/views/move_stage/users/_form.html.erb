@@ -161,7 +161,8 @@
 
   <div class="col-md-5">
     <div class="text-center stage-selection">
-      <%= f.select :stage_id, options_for_select(@supports.stages),
+      <%= f.select :stage_id, options_for_select(@supports.stages, 
+        selected: @user_form.user.profile.stage.id),
         {}, class: "form-control" %>
     </div>
     <div class="well">
