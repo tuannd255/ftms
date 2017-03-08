@@ -14,10 +14,10 @@
   </div>
 
   <div class="subject-structure">
-    <% subjects.each do |subject, profiles| %>
+    <% subjects.each do |subject, trainees| %>
       <%= render "course_subject", subject: subject,
-        profiles: profiles unless subject == "free_trainees" %>
+        trainees: trainees unless subject == "free_trainees" %>
     <% end %>
-    <%= render "free_trainees", profiles: subjects["free_trainees"] %>
+    <%= render "free_trainees", trainees: subjects["free_trainees"] %>
   </div>
 </div>

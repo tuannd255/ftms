@@ -20,6 +20,7 @@ class Subject < ApplicationRecord
   has_many :subject_categories, dependent: :destroy
   has_many :categories, through: :subject_categories
   has_many :subject_kick_offs, dependent: :destroy
+  has_many :user_subjects, dependent: :destroy
 
   validates :name, presence: true, uniqueness: true
   validates :during_time, presence: true, numericality: {greater_than: 0}

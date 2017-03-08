@@ -17,7 +17,7 @@
     <% end %>
   </div>
   <div class="structure-content">
-    <%= render "away", away_profiles: @support.away_trainees(location) %>
+    <%= render "away", trainees: @support.away_trainees(location) %>
   </div>
   <div class="structure-content">
     <% @support.organization(location).each do |trainer, subjects| %>

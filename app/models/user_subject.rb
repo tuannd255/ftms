@@ -12,6 +12,8 @@ class UserSubject < ApplicationRecord
   belongs_to :course
   belongs_to :trainee_course, foreign_key: :user_course_id
   belongs_to :course_subject
+  belongs_to :subject
+
   has_many :user_tasks, dependent: :destroy
   has_many :notifications, as: :trackable, dependent: :destroy
   has_many :activities, as: :trackable, class_name: "PublicActivity::Activity", dependent: :destroy
@@ -83,10 +85,6 @@ class UserSubject < ApplicationRecord
     column = UserSubject.statuses[status]
     start_user_course if init?
     update_info status: status, row: row, column: column, current_user: current_user
-  end
-
-  def subject
-    course_subject.subject if course_subject
   end
 
   def name
