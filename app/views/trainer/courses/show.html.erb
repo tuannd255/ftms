@@ -11,8 +11,8 @@
           <span class="label-status <%= set_background_color_status @course.status %>">
             <%= t "courses.labels.status.#{@course.status}" %>
           </span>
-          <div>
-            <p><i><%= @course.description %></i></p>
+          <div class="description">
+            <%= @course.description %>
           </div>
         </div>
       </div>

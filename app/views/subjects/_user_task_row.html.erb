@@ -4,14 +4,16 @@
 </div>
 <h2>
   <div class="dropdown task-action">
-    <button type="button" class="btn btn-primary btn-circle dropdown-toggle"
-      data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"
-      title=<%= t "user_tasks.title.change_status_task" %>>
-      <i class="glyphicon glyphicon-list"></i>
-    </button>
-    <ul class="dropdown-menu ul-task-action-<%= user_task.id %>">
-      <%= user_task_action(user_task.status).html_safe %>
-    </ul>
+    <% if @user_course.progress? && user_task.user_subject.progress? %>
+      <button type="button" class="btn btn-primary btn-circle dropdown-toggle"
+        data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"
+        title=<%= t "user_tasks.title.change_status_task" %>>
+        <i class="glyphicon glyphicon-list"></i>
+      </button>
+      <ul class="dropdown-menu ul-task-action-<%= user_task.id %>">
+        <%= user_task_action(user_task.status).html_safe %>
+      </ul>
+    <% end %>
   </div>
   <strong class="task-name"><%= user_task.task_name %></strong>
 </h2>
