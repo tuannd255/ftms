@@ -21,7 +21,8 @@ $(document).on("turbolinks:load", function() {
             data.requirement.forEach(function(requirement){
               j++;
               html += "<li type='1' class='list-group-item requirement-item' data-rqm="
-                + requirement.id + " data-parent-prj="+ project_id + ">" + j
+                + requirement.id + " data-parent-prj="+ project_id + ">" 
+                + "<span class='index'>" + j + '</span>'
                 + ".&nbsp;&nbsp;<span>" + requirement.name
                 + "</span><div class='action'><a href='#' class='rqm-edit' title='"
                 + I18n.t("buttons.edit") + "'><i class='fa fa-pencil'></i></a>\
@@ -90,7 +91,7 @@ $(document).on("turbolinks:load", function() {
           li_tag_name.replaceWith(clone_project);
           active_li(li_tag_name);
         }
-        update_index_project()();
+        update_index_project();
       }
     });
     e.preventDefault();
@@ -259,7 +260,8 @@ $(document).on("turbolinks:load", function() {
         flash_now('alert-success', I18n.t("projects.create_project.success"));
 
         prj_li.replaceWith("<li class='list-group-item project-item' data-prj="
-          + data.project.id + ">" + $('.list-project li').length
+          + data.project.id + ">" + "<span class='index'>" 
+          + $('.list-project li').length + '</span>.'
           + "&nbsp;&nbsp;<span>" + data.project.name + "</span><div class='action'>\
           <a href='#' class='prj-edit' title=" + I18n.t("buttons.edit")
           + "><i class='fa fa-pencil'></i></a><a href='#' class='prj-delete'\
@@ -269,7 +271,7 @@ $(document).on("turbolinks:load", function() {
           var j = i+1;
           var html = $.parseHTML("<li type='1' class='list-group-item requirement-item' data-rqm='"
             + data.requirements[i].id + "' data-parent-prj='"+ data.project.id + "'>"
-            + j + ".&nbsp;&nbsp;<span>" + data.requirements[i].name
+            + "<span class='index'>" + j + "</span>.&nbsp;&nbsp;<span>" + data.requirements[i].name
             + "</span><div class='action'><a href='#' class='rqm-edit' title='"
             + I18n.t("buttons.edit") + "'><i class='fa fa-pencil'></i></a>\
             <a href='#' class='rqm-delete' title='"
@@ -298,7 +300,8 @@ $(document).on("turbolinks:load", function() {
         flash_now('alert-success', I18n.t("projects.create_requirement.success"));
         rqm_li.replaceWith("<li type='1' class='list-group-item requirement-item' data-rqm="
           + data.requirement.id + " data-parent-prj="+ prj_id + ">"
-          + $('#list-rqms li').length + ".&nbsp;&nbsp;<span>" + data.requirement.name
+          + "<span class='index'>"
+          + $('#list-rqms li').length + ".</span>.&nbsp;&nbsp;<span>" + data.requirement.name
           + "</span><div class='action'><a href='#' class='rqm-edit' title='"
           + I18n.t("buttons.edit") + "'><i class='fa fa-pencil'></i></a>\
           <a href='#' class='rqm-delete' title='"
@@ -340,11 +343,17 @@ function flash_now(type, message) {
 }
 
 function update_index_project() {
+  $.each($('.list-project .list-group-item.project-item'), function(index, value) {
+    $(value).find('.index').html(index + 1);
+  });
   size = $('.list-project .list-group-item.project-item').length;
   $('#sumProject b').text(size);
 }
 
 function update_index_requirement() {
+  $.each($('#list-rqms .list-group-item.requirement-item[type]'), function(index, value) {
+    $(value).find('.index').html(index + 1);
+  });
   size = $('#list-rqms .list-group-item.requirement-item[type]').length;
   $('#sumRequirement b').text(size);
 }

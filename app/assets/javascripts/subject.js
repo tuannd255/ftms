@@ -38,7 +38,7 @@ function load_chart() {
 }
 
 function setbutton() {
-  $('.finish-subject').click(function(e) {
+  $('body').on('click', '.finish-subject', function(e) {
     e.preventDefault();
     var exec_finish = document.getElementById('finish-subject-exam');
     if (exec_finish) {
