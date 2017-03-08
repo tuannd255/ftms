@@ -14,11 +14,10 @@
   </div>
 
   <div class="subject-structure">
-    <% CourseSubject.load_course_subjects_for_trainer(trainer.id)
-      .each do |subject, course_subject| %>
-      <%= render "course_subject", subject: Subject.find(subject),
-        course_subject_ids: course_subject.pluck(:id), trainer_id: trainer.id %>
+    <% subjects.each do |subject, trainees| %>
+      <%= render "course_subject", subject: subject,
+        trainees: trainees unless subject == "free_trainees" %>
     <% end %>
-    <%= render "free_trainees", trainer: trainer %>
+    <%= render "free_trainees", trainees: subjects["free_trainees"] %>
   </div>
 </div>

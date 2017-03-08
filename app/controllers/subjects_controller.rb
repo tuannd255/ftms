@@ -19,10 +19,10 @@ class SubjectsController < ApplicationController
   end
 
   def load_subject
-    course_subject = @user_course.course.course_subjects
+    user_subject = @user_course.user_subjects
       .find_by subject_id: params[:id]
-    if course_subject
-      @subject = course_subject.subject
+    if user_subject
+      @subject = user_subject.subject
     else
       flash[:alert] = flash_message "not_find"
       redirect_to @user_course

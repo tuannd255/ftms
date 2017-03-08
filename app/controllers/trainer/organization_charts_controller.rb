@@ -3,6 +3,7 @@ class Trainer::OrganizationChartsController < ApplicationController
 
   def index
     @locations = Location.includes :manager
+    @support = Supports::OrganizationSupport.new
     add_breadcrumb_index "organization_charts"
   end
 end
