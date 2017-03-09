@@ -12,7 +12,8 @@
       <ul class="list-group">
         <% @projects.each.with_index 1 do |project, index| %>
           <li class="list-group-item project-item" data-prj="<%= project.id %>">
-            <%= "#{index}." %>&nbsp;&nbsp;<span><%= project.name %></span>
+            <span class="index"><%= index %></span>.&nbsp;&nbsp;
+            <span><%= project.name %></span>
             <div class="action">
               <a href="#" class="prj-edit" title="<%= t "buttons.edit" %>">
                 <i class="fa fa-pencil"></i></a>

@@ -4,7 +4,8 @@ module InitUserSubject
       user_course_subject.first.user_subjects.create(course_id: course_id,
         user_id: user_course_subject.first.user_id,
         course_subject_id: user_course_subject.second.id,
-        during_time: user_course_subject.second.subject.during_time)
+        during_time: user_course_subject.second.subject.during_time,
+      	subject_id: user_course_subject.second.subject_id)
     end
   end
 end
