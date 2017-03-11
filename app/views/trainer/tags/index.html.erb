@@ -1,0 +1,18 @@
+<div class="container" id="tags">
+  <% @tags.each_slice 4 do |tag| %>
+    <div class="row">
+      <% tag.each do |tag| %>
+        <div class="text-center one-tag">
+          <h4><%= link_to tag, trainer_tag_path(tag.name) %></h4>
+          <h5 class="number-posts">
+            <i class="fa fa-pencil" aria-hidden="true"></i>
+            <em><%= "#{tag.taggings_count} posts" %></em>
+          </h5>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+<div class="col-md-8 col-md-offset-4">
+  <%= paginate @tags, theme: "twitter-bootstrap-3" %>
+</div>

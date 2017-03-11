@@ -65,6 +65,7 @@ Rails.application.routes.draw do
     resources :synchronizes
     resources :categories
     resources :posts, only: [:index, :show, :destroy]
+    resources :tags, only: [:show, :index]
   end
 
   namespace :trainer do
@@ -115,6 +116,8 @@ Rails.application.routes.draw do
     resources :evaluation_standards
     resources :calendars, only: :index
     resources :exams, only: [:index, :show]
+    resources :posts, only: [:index, :show, :destroy]
+    resources :tags, only: [:show, :index]
   end
 
   namespace :assign_user do

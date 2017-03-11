@@ -1,0 +1,39 @@
+<% provide :title, t("tags.show.tag_questions", tag: params[:id]).html_safe %>
+
+<div id="qna">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="tabs">
+        <div class="heading clearfix">
+          <ul class="nav nav-tabs main-tabs pull-right"
+          data-selected-tab="<%= params[:tab] %>">
+            <% %w(newest unanswered).each_with_index do |post_type, index| %>
+              <li class="<%= 'active' if index == 0 %>">
+                <a data-toggle="tab" href="#<%= post_type %>">
+                  <%= t "qna.index.#{post_type}" %>
+                </a>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+      <div class="tab-content">s
+        <% %w(newest unanswered).each_with_index do |post_type, index| %>
+          <div id="<%= post_type %>"
+          class="tab-pane fade <%= 'in active' if index == 0 %>">
+            <%= render @supports.send "#{post_type}_posts" %>
+            <% if @supports.send("#{post_type}_posts").any? %>
+              <div class="row">
+                <div class="col-md-12">
+                  <%= paginate @supports.send("#{post_type}_posts"),
+                    params: {tab: post_type} %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+</div>

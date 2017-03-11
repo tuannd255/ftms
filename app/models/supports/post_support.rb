@@ -6,10 +6,11 @@ class Supports::PostSupport
     @comment = args[:comment]
     @filter_service = args[:filter_service]
     @search_params = args[:search_params]
+    @namespace = args[:namespace]
   end
 
   def presenters
-    PostPresenter.new(posts).render
+    PostPresenter.new(posts: posts, namespace: @namespace).render
   end
 
   %w(newest unanswered).each do |post_type|

@@ -1,0 +1,31 @@
+<div class="row post">
+  <div class="col-sm-2 col-xs-4 stats">
+    <div class="wrapper">
+      <div class="count"><%= post.comments.roots.count %></div>
+      <div>
+        <%= t("qna.index.answer").pluralize post.comments.roots.count %>
+      </div>
+      <div class="count"><%= post.views %></div>
+      <div>
+        <%= t("qna.index.view").pluralize post.views %>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-10 col-xs-8  summary">
+    <h3 class="title"><%= link_to post.title, [:trainer, post] %></h3>
+    <div class="quote">
+      <%= truncate strip_tags(post.content),
+        length: Settings.qna.truncated_characters %>
+    </div>
+    <div class="tags">
+      <% post.tag_list.each do |tag| %>
+        <%= link_to tag, trainer_tag_path(tag), class: "tag" %>
+      <% end %>
+    </div>
+    <div class="create-time">
+      <%= t "qna.index.time_ago",
+        time: time_ago_in_words(post.created_at) %> -
+      <%= link_to post.user_name, [:trainer, post.user] %>
+    </div>
+  </div>
+</div>

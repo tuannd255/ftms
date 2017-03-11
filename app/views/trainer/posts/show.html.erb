@@ -6,16 +6,18 @@
       <div class="clearfix main">
         <div class="clearfix heading">
           <h1 class="title show-post"><%= @post.title.html_safe %></h1>
-          <%= link_to admin_post_path(@post),
-            class: "btn btn-danger button-delete",
-            remote: true, method: :delete, title: t("buttons.delete"),
-            data: {confirm: t("messages.delete.confirm")} do %>
-            <i class="fa fa-remove"></i>
+          <% if @post.user.trainer && current_user?(@post.user.trainer)%>
+            <%= link_to trainer_post_path(@post),
+              class: "btn btn-danger button-delete",
+              remote: true, method: :delete, title: t("buttons.delete"),
+              data: {confirm: t("messages.delete.confirm")} do %>
+              <i class="fa fa-remove"></i>
+            <% end %>
           <% end %>
         </div>
 
         <div class="col-sm-2 col-xs-4 text-center">
-          <%= link_to admin_user_path(@post.user), class: "user-info" do %>
+          <%= link_to trainer_user_path(@post.user), class: "user-info" do %>
             <p class="avatar">
               <%= avatar_user_tag @post.user, "profile-user img-circle",
                 Settings.image_size_50 %>
@@ -33,7 +35,7 @@
           </div>
           <div class="tags">
             <% @post.tag_list.each do |tag| %>
-              <%= link_to tag, admin_tag_path(tag), class: "tag" %>
+              <%= link_to tag, trainer_tag_path(tag), class: "tag" %>
             <% end %>
           </div>
           <div class="create-time">
@@ -50,7 +52,7 @@
         <% @post.comments.roots.each do |root_comment| %>
           <div class="root_comment">
             <div class="avatar">
-              <%= link_to admin_user_path(root_comment.user), class: "avatar" do %>
+              <%= link_to trainer_user_path(root_comment.user), class: "avatar" do %>
                 <%= avatar_user_tag root_comment.user, "profile-user img-circle",
                   Settings.image_size_40 %>
                 <%= root_comment.user_name %>
@@ -62,7 +64,7 @@
             <% root_comment.children.each do |sub_comment| %>
               <div class="subcomment">
                 <div class="avatar">
-                  <%= link_to admin_user_path(sub_comment.user), class: "avatar" do %>
+                  <%= link_to trainer_user_path(sub_comment.user), class: "avatar" do %>
                     <%= avatar_user_tag sub_comment.user, "profile-user img-circle",
                       Settings.image_size_40 %>
                     <%= sub_comment.user_name %>

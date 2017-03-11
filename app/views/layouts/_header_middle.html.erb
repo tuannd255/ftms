@@ -80,11 +80,11 @@
         </ul>
       <% end %>
     </li>
-    <% end %>
+  <% end %>
 
-  <% if policy admin_posts_path %>
+  <% if policy eval "#{@namespace}_posts_path" %>
     <li>
-      <%= link_to admin_posts_path do %>
+      <%= link_to eval "#{@namespace}_posts_path" do %>
         <span><%= t "posts.name_sidebar" %></span>
       <% end %>
     </li>
