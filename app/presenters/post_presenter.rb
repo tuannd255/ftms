@@ -1,8 +1,9 @@
 class PostPresenter < ActionView::Base
   include Rails.application.routes.url_helpers
 
-  def initialize posts
-    @posts = posts
+  def initialize args = {}
+    @posts = args[:posts]
+    @namespace = args[:namespace]
   end
 
   def render
@@ -30,10 +31,10 @@ class PostPresenter < ActionView::Base
     "<div class=\"trow list_#{index}\" id=\"sidebar-row-#{index}\">
       <div class=\"tcell stt\">#</div>
       <div class=\"tcell trainee_name \">
-        #{link_to post.user.name, admin_user_path(post.user)}
+        #{link_to post.user.name, eval("#{@namespace}_user_path(post.user)")}
       </div>
       <div class=\"tcell post_title \">
-        #{link_to post.title, admin_post_path(post)}
+        #{link_to post.title, eval("#{@namespace}_post_path(post)")}
       </div>
     </div>"
   end
@@ -49,7 +50,7 @@ class PostPresenter < ActionView::Base
       <div class=\"tcell tag \"title=\"#{post.created_at}\">"
     tags = ""
     post.tag_list.each do |tag|
-      tags << "#{link_to tag, "#", class: "tag"}, "
+      tags << "#{link_to tag, eval("#{@namespace}_tag_path(tag)"), class: "tag"}, "
     end
     html << tags.chomp(", ")
     html << "</div></div>"
