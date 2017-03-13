@@ -20,8 +20,8 @@
                     <%= truncate user_course.course_name, length: 20 %>
                   </span>
                   <span class="label-status
-                    <%= set_background_color_status user_course.course_status %>">
-                    <%= t "courses.statuses.#{user_course.course.status}" %>
+                    <%= set_background_color_status user_course.status %>">
+                    <%= t "courses.statuses.#{user_course.status}" %>
                   </span>
                   <p class="course-description">
                     <%= truncate user_course.course_description, length: 129 %>
