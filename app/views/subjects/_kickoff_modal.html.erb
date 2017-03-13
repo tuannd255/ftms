@@ -1,4 +1,4 @@
-<% if @subject.subject_kick_offs.any? %>
+<% if @subject_supports.subject.subject_kick_offs.any? %>
   <div id="kickoff_modal" class="modal fade" role="dialog">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -11,7 +11,7 @@
         <div class="modal-body">
           <div class="flexslider">
             <ul class="slides">
-              <%= render @subject.subject_kick_offs %>
+              <%= render @subject_supports.subject.subject_kick_offs %>
             </ul>
           </div>
           <button id="skip-kickoff" class="btn btn-primary">

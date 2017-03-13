@@ -50,9 +50,8 @@ class UserTasksController < ApplicationController
 
   private
   def load_data
-    @subject_supports = Supports::SubjectTraineeSupport.new subject: @user_task
-      .user_subject.subject, user_course_id: @user_task.user_subject
-      .user_course_id
+    @subject_supports = Supports::TraineeSubjectSupport.new user_subject: @user_task
+      .user_subject, user_course: @user_task.user_subject.trainee_course
   end
 
   def authorize_user_task

@@ -37,6 +37,8 @@ $(document).on('turbolinks:load', function(){
       var parent_pull_rq = $(this).closest('div.pull-rq-field');
       if (parent_pull_rq.find('div.pull-requestes').length > 1) {
         $(this).closest('div.pull-requestes').remove();
+      } else {
+        alert(I18n.t('user_tasks.can_not_remove_pull'));
       }
     });
 
