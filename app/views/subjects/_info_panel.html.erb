@@ -33,7 +33,7 @@
   <div class="box box-primary">
     <div class="box-header with-border">
       <h3 class="label box-title pull-left"><%= t "subjects.note" %></h3>
-      <% if @subject.subject_kick_offs.any? %>
+      <% if @subject_supports.subject.subject_kick_offs.any? %>
         <%= button_tag class: "btn btn-info pull-right btn-show-kickoff",
           title: t("subjects.show.view_kickoff"), id: "show_kickoff",
           data: {toggle: "modal", target: "#kickoff_modal"} do %>
@@ -43,9 +43,12 @@
     </div>
     <div class="box-body">
       <div class="subject-note">
-        <p><%= t "subjects.note_during_time", during_time: @subject.during_time %></p>
+        <p>
+          <%= t "subjects.note_during_time", 
+            during_time: @subject_supports.subject.during_time %>
+        </p>
       </div>
     </div>
   </div>
 </div>
-<%= render partial: "shared/documents", locals: {documents: @subject.documents} %>
+<%= render partial: "shared/documents", locals: {documents: @subject_supports.subject.documents} %>

@@ -1,4 +1,4 @@
-<% provide :title, @subject_supports.user_subject.subject_name %>
+<% provide :title, @subject_supports.subject.name %>
 
 <div id="subject-show"
   data-show-kickoff="<%= @subject_supports.show_kick_off? %>">
@@ -14,7 +14,7 @@
         <% unless @subject_supports.user_subject.finish? || @subject_supports.course.finish? %>
           <div id="dialog-finish" title="<%= t 'user_subjects.finish.confirm-title' %>"
             class="dialog">
-            <% if @subject.subject_detail %>
+            <% if @subject_supports.subject.subject_detail %>
               <p><%= t "user_subjects.finish.confirm_exam" %></p>
               <%= link_to "", user_subject_path(@subject_supports.user_subject),
                 method: :put, class: "hidden", id: "finish-subject-exam" %>

@@ -1,20 +1,21 @@
 class TasksController < ApplicationController
   before_action :authorize, except: [:update]
   before_action :load_task, only: [:update, :destroy]
-  before_action :load_user_subject_in_course, only: [:edit, :update, :destroy]
+  before_action :find_user_subject, only: [:edit, :update, :destroy]
   before_action :load_user_course, only: [:edit, :destroy]
   before_action :authorize_task, only: [:update]
 
   def create
     @task = Task.new task_params
     authorize_task
-    load_user_subject_in_course
+    find_user_subject
     if @task.save
       flash.now[:success] = flash_message "created"
     else
       flash.now[:failed] = flash_message "not_created"
     end
     @user_task = user_task
+    @user_course = @user_subject.trainee_course
     load_data
     respond_to do |format|
       format.js
@@ -29,6 +30,7 @@ class TasksController < ApplicationController
       flash.now[:failed] = flash_message "not_updated"
     end
     @user_task = user_task
+    @user_course = @user_subject.trainee_course
     load_data
     respond_to do |format|
       format.js
@@ -50,7 +52,7 @@ class TasksController < ApplicationController
     params.require(:task).permit Task::ATTRIBUTES_PARAMS
   end
 
-  def load_user_subject_in_course
+  def find_user_subject
     @user_subject = UserSubject.find_by user: current_user,
       course_subject: @task.course_subject
   end
@@ -69,8 +71,7 @@ class TasksController < ApplicationController
   end
 
   def load_data
-    @subject_supports = Supports::SubjectTraineeSupport.new subject: @user_task
-      .user_subject.subject, user_course_id: @user_task.user_subject
-      .user_course_id
+    @subject_supports = Supports::TraineeSubjectSupport.new user_subject: @user_subject, 
+      user_course: @user_subject.trainee_course
   end
 end

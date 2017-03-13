@@ -1,10 +1,10 @@
 <div class="author">
-  <%= link_to avatar_user_tag(user_task.trainee, "img-circle", Settings.image_size_40),
-    user_path(user_task.trainee), title: user_task.trainee_name %>
+  <%= link_to avatar_user_tag(user_task.user, "img-circle", Settings.image_size_40),
+    user_path(user_task.user), title: user_task.user.name %>
 </div>
 <h2>
   <div class="dropdown task-action">
-    <% if @user_course.progress? && user_task.user_subject.progress? %>
+    <% if @user_course.progress? && @subject_supports.user_subject.progress? %>
       <button type="button" class="btn btn-primary btn-circle dropdown-toggle"
         data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"
         title=<%= t "user_tasks.title.change_status_task" %>>

@@ -22,6 +22,7 @@ en:
     task_init: "Task Init"
     task_finish: "Task Finish"
   user_tasks:
+    can_not_remove_pull: "Can not remove! We need at leat one pullrequest"
     statuses:
       in_progress: "In Progress"
       finished: "Finished"

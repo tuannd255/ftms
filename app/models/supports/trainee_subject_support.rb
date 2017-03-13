@@ -1,15 +1,13 @@
-class Supports::SubjectTraineeSupport
+class Supports::TraineeSubjectSupport
   attr_reader :subject, :args
 
   def initialize args
-    @subject = args[:subject]
-    @user_course_id = args[:user_course_id]
+    @user_subject = args[:user_subject]
+    @user_course = args[:user_course]
   end
 
   def course_subject
-    @course_subject ||= CourseSubject.includes(
-      user_subjects: [:trainee_course, course: [:trainers, :trainees]])
-      .find_by course_id: user_course.course_id, subject_id: @subject.id
+    @course_subject ||= CourseSubject.find_by course: course, subject: subject
   end
 
   def project
@@ -21,36 +19,39 @@ class Supports::SubjectTraineeSupport
   end
 
   def course
-    @course ||= course_subject.course
+    @course ||= @user_course.course
   end
 
   def user_subject
-    @user_subject ||= course_subject.user_subjects
-      .find{|user_subject| user_subject.user_id == user_course.user_id}
+    @user_subject 
+  end
+
+  def subject
+    @subject ||= user_subject.subject
   end
 
   def trainers
-    @trainers ||= user_subject.course.trainers
+    @trainers ||= members.collect{|member| member.user if member.is_a? TrainerCourse}.reject!{|t| t.nil?}
   end
 
   def trainees
-    @trainees ||= user_subject.course.trainees
+    @trainees ||= members.collect{|member| member.user if member.is_a? TraineeCourse}.reject!{|t| t.nil?}
   end
 
   def users
-    @user ||= (trainees + trainers).take Settings.number_member_show
+    @user ||= members.take Settings.number_member_show
   end
 
   def member_size
-    @member_size ||= trainers.size + trainees.size
+    @member_size ||= members.size
   end
 
   def count_member
-    @count_member ||= trainers.size + trainees.size - Settings.number_member_show
+    @count_member ||= member_size - Settings.number_member_show
   end
 
   def user_tasks
-    @user_tasks ||= user_subject.user_tasks.includes :task, :user, :user_subject
+    @user_tasks ||= user_subject.user_tasks.includes :task, :user
   end
 
   def task_statuses
@@ -66,12 +67,13 @@ class Supports::SubjectTraineeSupport
   end
 
   def user_course
-    @user_course ||= UserCourse.includes(:user).find_by id: @user_course_id
+    @user_course 
   end
 
   UserTask.statuses.each do |key, value|
     define_method "number_of_task_#{key}" do
-      instance_variable_set "@number_of_task_#{key}", user_tasks.send(key).size
+      instance_variable_set "@number_of_task_#{key}", 
+        user_tasks.select{|user_task| user_task.send("#{key}?")}.size
     end
   end
 
@@ -99,5 +101,10 @@ class Supports::SubjectTraineeSupport
     else
       false
     end
+  end
+
+  private
+  def members
+    @members ||= course.user_courses
   end
 end
