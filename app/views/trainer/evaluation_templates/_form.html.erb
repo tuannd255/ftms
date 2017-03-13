@@ -33,7 +33,7 @@
               </div>
             <% end %>
           </div>
-          <div class="panel-footer text-right">
+          <div class="panel-footer text-right size-nonselect">
             <%= t "count_records", record: @evaluation_standards.size %>
           </div>
         </div>
@@ -56,7 +56,8 @@
           <div class="panel-heading text-center">
             <%= t "evaluation_templates.standards.select" %>
             <%= link_to "#", "data-toggle": "modal",
-              "data-target": "#new-evaluation-standard-modal", class: "new-evaluation-standard" do %>
+              "data-target": "#new-evaluation-standard-modal", 
+              "data-template-id": @evaluation_template.id, class: "new-evaluation-standard" do %>
               <i class="fa fa-plus pull-right" aria-hidden="true"></i>
             <% end %>
 
@@ -80,7 +81,7 @@
               </div>
             <% end %>
           </div>
-          <div class="panel-footer text-right">
+          <div class="panel-footer text-right size-select">
             <%= t "count_records", record: @evaluation_template.evaluation_standards.size %>
           </div>
         </div>

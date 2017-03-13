@@ -8,8 +8,12 @@
       + '<input class="hidden" type="checkbox" value="<%= @evaluation_standard.id %>" checked="checked" name="evaluation_template[evaluation_standard_ids][]" id="evaluation_template_evaluation_standard_ids_<%= @evaluation_standard.id %>">'
       + '<%= @evaluation_standard.name %></div></div>';
 
-    $('.selected-evaluation-standards').prepend(evaluation_standard_form);
-    var all_items_select = $('div.selected-evaluation-standards  div.content_item');
+    if ($('.index-select').length > 0) {
+      $($(".index-select")[$('.index-select').length - 1]).parent().append(evaluation_standard_form);
+    } else {
+      $('.selected-evaluation-standards').prepend(evaluation_standard_form);
+    }
+    var all_items_select = $('div.selected-evaluation-standards div.content_item');
     var i = 1;
     $('.index-select').each(function () {
       $(this).html(i);
@@ -22,7 +26,11 @@
       '</div><div class="content_item col-md-11" data-id="<%= @evaluation_standard.id %>" data-name="<%= @evaluation_standard.name %>">'
       + '<%= @evaluation_standard.name %></div></div>';
 
-    $('.noneselected-evaluation-standards').prepend(evaluation_standard_form);
+    if ($('.index-nonselect').length > 0) {
+      $($(".index-nonselect")[$('.index-nonselect').length - 1]).parent().append(evaluation_standard_form);
+    } else {
+      $('.noneselected-evaluation-standards').prepend(evaluation_standard_form);
+    }
     var all_items_nonselect = $('div.noneselected-evaluation-standards div.content_item');
     var i = 1;
     $('.index-nonselect').each(function () {

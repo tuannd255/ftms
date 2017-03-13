@@ -19,8 +19,15 @@ class UsersController < ApplicationController
     @user_form.assign_attributes user_params
     @user_form.assign_password user_params
     if @user_form.save
+      @user.update_attributes avatar: user_params[:avatar] if user_params[:avatar]
       sign_in @user, bypass: true
-      redirect_to @user, notice: flash_message("updated")
+      if current_user.is_a? Admin
+        redirect_to [:admin, @user], notice: flash_message("updated")
+      elsif current_user.is_a? Trainer  
+        redirect_to [:trainer, @user], notice: flash_message("updated")
+      else
+        redirect_to @user, notice: flash_message("updated")
+      end
     else
       load_university
       flash[:alert] = flash_message "not_updated"

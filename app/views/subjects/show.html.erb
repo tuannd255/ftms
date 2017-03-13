@@ -27,7 +27,7 @@
           <% if current_user.trainee? && @subject_supports.user_subject.progress? %>
             <%= link_to t("buttons.finish"), "#",
               class: "btn btn-danger pull-right finish-subject" %>
-          <% elsif @subject.subject_detail &&
+          <% elsif @subject_supports.subject.subject_detail &&
             @subject_supports.user_subject.waiting? %>
             <% if @subject_supports.exam_process &&
               @subject_supports.exam_process.testing? %>
