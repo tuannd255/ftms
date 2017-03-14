@@ -29,7 +29,6 @@ $(document).on('turbolinks:load', function(){
 
   $('body').on('click', 'a.task-action', function (e) {
     e.preventDefault();
-
     var user_task_row = $(this).closest('.task.user-task-row'),
         action = $(this).data('action'),
         task_name = $('strong.task-name', user_task_row).text();
@@ -65,7 +64,7 @@ $(document).on('turbolinks:load', function(){
       str = user_task_row[0].id;
       str = str.slice(4, str.length);
       $.ajax({
-        url: "http://localhost:3000/en/user_tasks/" + str,
+        url: user_task_row.data('task-url'),
         method: "delete"
       }).done(function() {
         console.log(this);

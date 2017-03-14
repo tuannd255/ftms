@@ -16,7 +16,11 @@ class MoveStage::UsersController < ApplicationController
     if @user_form.save
       sign_in(@user, bypass: true) if current_user? @user
       flash[:success] = flash_message "updated"
-      redirect_to admin_training_managements_path
+      if current_user.is_a? Admin
+        redirect_to admin_training_managements_path
+      else
+        redirect_to trainer_training_managements_path
+      end
     else
       load_profile
       render :edit
