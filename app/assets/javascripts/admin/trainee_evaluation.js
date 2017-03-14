@@ -93,7 +93,9 @@ $(document).on('turbolinks:load', function() {
     } else {
       nearest_li.hide();
       nearest_li.find('input._destroy').val(true);
+      nearest_li.find('input.use').val(false);
     }
+    build_total_point();
   });
 });
 

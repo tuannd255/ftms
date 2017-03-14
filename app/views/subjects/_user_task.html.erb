@@ -1,5 +1,6 @@
 <div class="task user-task-row" id="row-<%= user_task.id %>"
-  data-task="<%= user_task_path user_task, format: :js %>">
+  data-task="<%= user_task_path user_task, format: :js %>"
+  data-task-url="<%= user_task_url user_task %>">
   <%= render "subjects/user_task_row", user_task: user_task %>
   <% if @user_course.progress? && @subject_supports.user_subject.progress? %>
   	<%= render "subjects/edit_task_modal", user_task: user_task %>
