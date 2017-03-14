@@ -159,6 +159,9 @@ $(document).on("turbolinks:load", function() {
         } else {
           li_tag_name.replaceWith(clone_requirement);
         }
+        if ($(li_tag_name).closest('ul').find('li').length == 0) {
+          $('#list-rqms').html("<div class='empty'><h2>" + I18n.t("projects.label.empty") + "</h2></div>");
+        }
         update_index_requirement()
       }
     });
@@ -298,6 +301,9 @@ $(document).on("turbolinks:load", function() {
       data: {project_requirement: {name: pqm_name, project_id: prj_id}},
       success: function(data) {
         flash_now('alert-success', I18n.t("projects.create_requirement.success"));
+        if ($(rqm_li).closest('ul').find('li').length == 1) {
+          $(rqm_li).closest('ul').find('.empty').remove();
+        }
         rqm_li.replaceWith("<li type='1' class='list-group-item requirement-item' data-rqm="
           + data.requirement.id + " data-parent-prj="+ prj_id + ">"
           + "<span class='index'>"

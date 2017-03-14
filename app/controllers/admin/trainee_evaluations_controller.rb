@@ -16,15 +16,14 @@ class Admin::TraineeEvaluationsController < ApplicationController
     add_breadcrumb @supports.targetable.user_name,
       [:admin, @supports.targetable.user]
     add_breadcrumb_new "trainee_evaluations"
-    render json: @supports.evaluation_template.evaluation_standards if
-      params[:evaluation_template_id]
+    if params[:evaluation_template_id] 
+      render json: @supports.evaluation_template.evaluation_standards 
+    end
   end
 
   def create
     @trainee_evaluation = TraineeEvaluation.new trainee_evaluation_params
-    @trainee_evaluation_form = TraineeEvaluationForm.new @trainee_evaluation
-    if @trainee_evaluation_form.validate trainee_evaluation_params
-      @trainee_evaluation_form.save
+    if @trainee_evaluation.save
       flash[:success] = flash_message "created"
       redirect_to [:admin, :trainee_evaluations]
     else
@@ -39,14 +38,10 @@ class Admin::TraineeEvaluationsController < ApplicationController
     add_breadcrumb @supports.targetable.user_name,
       [:admin, @supports.targetable.user]
     add_breadcrumb_edit "trainee_evaluations"
-    render json: @supports.evaluation_template.evaluation_standards if
-      params[:evaluation_template_id]
   end
 
   def update
-    @trainee_evaluation_form = TraineeEvaluationForm.new @trainee_evaluation
-    if @trainee_evaluation_form.validate trainee_evaluation_params
-      @trainee_evaluation_form.save
+    if @trainee_evaluation.update_attributes trainee_evaluation_params
       flash[:success] = flash_message "updated"
       redirect_to [:admin, :trainee_evaluations]
     else
@@ -73,7 +68,6 @@ class Admin::TraineeEvaluationsController < ApplicationController
       @supports = Supports::TraineeEvaluationSupport.new trainee_evaluation:
         @trainee_evaluation, targetable: targetable,
         evaluation_template: evaluation_template
-      @trainee_evaluation_form = TraineeEvaluationForm.new @trainee_evaluation
     else
       flash[:alert] = flash_message "not_find"
       redirect_to [:admin, :trainee_evaluations]
