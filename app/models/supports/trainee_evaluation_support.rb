@@ -19,12 +19,13 @@ class Supports::TraineeEvaluationSupport
       object.id]}
   end
 
+  def nonselected_standards
+    @nonselected_standards ||= @trainee_evaluation
+      .evaluation_template.evaluation_standards - @trainee_evaluation.evaluation_standards
+  end
+
   def trainee_evaluations
-    @trainee_evaluations ||= if @current_user.admin?
-      TraineeEvaluation.includes :user
-    else
-      @current_user.trainee_evaluations.includes :user
-    end
+    @trainee_evaluations ||= TraineeEvaluation.includes :user
   end
 
   def filter_data_user

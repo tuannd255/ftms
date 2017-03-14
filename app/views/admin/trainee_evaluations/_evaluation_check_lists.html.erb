@@ -1,4 +1,5 @@
-<div class="list-group checked-list-box" id="list-evaluation">
+<div class="list-group checked-list-box" id="list-evaluation"
+  data-standard-nonselected="<%= @supports.nonselected_standards.to_json unless f.object.new_record? %>">
   <% if @trainee_evaluation.evaluation_check_lists.any? %>
     <%= f.fields_for :evaluation_check_lists,
       @trainee_evaluation.evaluation_check_lists do |ff| %>
@@ -17,5 +18,9 @@
         </div>
       </li>
     <% end %>
+  <% end %>
+
+  <% unless f.object.new_record? %>
+    <div id="non-exist"></div>
   <% end %>
 </div>

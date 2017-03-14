@@ -5,4 +5,5 @@ class EvaluationTemplate < ApplicationRecord
 
   has_many :evaluation_items, dependent: :destroy
   has_many :evaluation_standards, through: :evaluation_items
+  has_many :trainee_evaluations, dependent: :destroy
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170308063909) do
+ActiveRecord::Schema.define(version: 20170314004431) do
 
   create_table "activities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "trackable_type"
@@ -615,10 +615,11 @@ ActiveRecord::Schema.define(version: 20170308063909) do
   create_table "trainee_evaluations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "targetable_type"
     t.integer  "targetable_id"
-    t.float    "total_point",     limit: 24
+    t.float    "total_point",            limit: 24
     t.integer  "user_id"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.integer  "evaluation_template_id"
   end
 
   create_table "trainee_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
