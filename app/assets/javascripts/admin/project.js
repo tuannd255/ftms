@@ -23,7 +23,7 @@ $(document).on("turbolinks:load", function() {
               html += "<li type='1' class='list-group-item requirement-item' data-rqm="
                 + requirement.id + " data-parent-prj="+ project_id + ">" 
                 + "<span class='index'>" + j + '</span>'
-                + ".&nbsp;&nbsp;<span>" + requirement.name
+                + ".&nbsp;&nbsp;<span class='requirement-name'>" + requirement.name
                 + "</span><div class='action'><a href='#' class='rqm-edit' title='"
                 + I18n.t("buttons.edit") + "'><i class='fa fa-pencil'></i></a>\
                 <a href='#' class='rqm-delete' title='"
@@ -65,7 +65,7 @@ $(document).on("turbolinks:load", function() {
     li_tag_name = $(this).closest('li');
     active_li(li_tag_name);
     clone_project = li_tag_name.clone();
-    var name = li_tag_name.find('span').text();
+    var name = li_tag_name.find('span.project-name').text();
     name_field_html = "<input type='text' class='edit-name-field' name='project-name'\
       value='"+ name +"' maxlength='255'><a href='#' class='edit-prj-save' title='"
       + I18n.t("buttons.save") + "'><i class='fa fa-check'></i></a>\
@@ -115,7 +115,7 @@ $(document).on("turbolinks:load", function() {
       data: {project: {name: new_name}},
       complete: function(data) {
         if (data.status == 200) {
-          clone_project.find('span').html(new_name);
+          clone_project.find('span.project-name').html(new_name);
         }
         li_tag_name.replaceWith(clone_project);
         active_li(li_tag_name);
@@ -132,7 +132,7 @@ $(document).on("turbolinks:load", function() {
     }
     li_tag_name = $(this).closest('li');
     clone_requirement = li_tag_name.clone();
-    var name = li_tag_name.find('span').text();
+    var name = li_tag_name.find('span.requirement-name').text();
     name_field_html = "<input type='text' class='edit-name-field' name='requirement-name'\
       value='"+ name +"'><a href='#' class='edit-rqm-save' title='"
       + I18n.t("buttons.save") + "'><i class='fa fa-check'></i></a>\
@@ -159,7 +159,7 @@ $(document).on("turbolinks:load", function() {
         } else {
           li_tag_name.replaceWith(clone_requirement);
         }
-        if ($(li_tag_name).closest('ul').find('li').length == 0) {
+        if ($('#list-rqms').find('li').length == 0) {
           $('#list-rqms').html("<div class='empty'><h2>" + I18n.t("projects.label.empty") + "</h2></div>");
         }
         update_index_requirement()
@@ -180,7 +180,7 @@ $(document).on("turbolinks:load", function() {
       data: {project_requirement: {name: new_name}},
       complete: function(data) {
         if (data.status == 200) {
-          clone_requirement.find('span').html(new_name);
+          clone_requirement.find('span.requirement-name').html(new_name);
         }
         li_tag_name.replaceWith(clone_requirement);
       }
@@ -265,7 +265,7 @@ $(document).on("turbolinks:load", function() {
         prj_li.replaceWith("<li class='list-group-item project-item' data-prj="
           + data.project.id + ">" + "<span class='index'>" 
           + $('.list-project li').length + '</span>.'
-          + "&nbsp;&nbsp;<span>" + data.project.name + "</span><div class='action'>\
+          + "&nbsp;&nbsp;<span class='project-name'>" + data.project.name + "</span><div class='action'>\
           <a href='#' class='prj-edit' title=" + I18n.t("buttons.edit")
           + "><i class='fa fa-pencil'></i></a><a href='#' class='prj-delete'\
           title='" + I18n.t("buttons.delete") + "'><i class='fa fa-remove'></i></a>\
@@ -291,7 +291,7 @@ $(document).on("turbolinks:load", function() {
   });
 
   $('body').on('click', '.new-rqm-save', function (e) {
-    var pqm_name = $('.list-requirement input.edit-name-field').val();
+    var pqm_name = $(this).parent().find('input.edit-name-field').val();
     var prj_id = $('li.project-item.active').data('prj');
     var rqm_li = $(this).closest('li');
     $.ajax({

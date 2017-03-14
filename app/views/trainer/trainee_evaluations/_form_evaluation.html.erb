@@ -30,14 +30,15 @@
     <div class="evaluation-details col-md-8 col-md-offset-2">
       <div class="title"><%= t "layouts.trainee_evaluations" %></div>
       <div class="form-group">
-        <%= select_tag :evaluation_template,
-          options_for_select(@supports.evaluation_templates), {include_blank: true,
-          class: "form-control"} %>
+        <% if f.object.new_record? %>
+          <%= f.select :evaluation_template_id,
+            options_for_select(@supports.evaluation_templates), {include_blank: true}, 
+            {class: "form-control"} %>
+        <% else %>
+          <h3><%= @trainee_evaluation.evaluation_template.name %></h3>
+        <% end %>
       </div>
       <%= render "evaluation_check_lists", f: f %>
-    </div>
-    <div class="col-md-2">
-      <%= link_to t("trainee_evaluations.add_new"), "#", id: "add-new" %>
     </div>
     <div class="row">
       <div class="col-md-1 col-md-offset-10">
