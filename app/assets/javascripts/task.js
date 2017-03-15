@@ -1,4 +1,18 @@
 $(document).on('turbolinks:load', function(){
+  $('#TaskModal').on('show.bs.modal', function () {
+    var null_element = [];
+    $('#TaskModal').find('.pull-requestes').each(function() {
+      if (!$(this).find('input').val()) {
+        null_element.push($(this));
+      }
+    });
+
+    null_element.shift();
+    for (i = 0; i < null_element.length; i++) { 
+      null_element[i].remove();
+    }
+  })
+
   $('body').on('keypress', '.task-pullurl input.link-field', function (e) {
     if (e.which == 13){
       e.preventDefault();
@@ -27,33 +41,35 @@ $(document).on('turbolinks:load', function(){
     $(_pull_url).val(_git_links);
   });
 
+  $('body').on('click', '.pull-rq-field .btn-rm-pull .btn-circle',function () {
+    var parent_pull_rq = $(this).closest('div.pull-rq-field');
+    if (parent_pull_rq.find('div.pull-requestes').length > 1) {
+      $(this).closest('div.pull-requestes').remove();
+    } else {
+      alert(I18n.t('user_tasks.can_not_remove_pull'));
+    }
+  });
+
+
+  $('body').on('click', '.pull-rq-field .btn-submit-pull .btn-circle',function () {
+    var pull_rq = $(this).closest('div.pull-requestes').find('input.link-field').val(),
+        _that = this,
+        _url = $(this).closest('div.task.user-task-row').data('task');
+    $.ajax({
+      url: _url,
+      method: 'PATCH',
+      data: {pull_url: pull_rq},
+      complete: function (data) {
+        $(_that).closest('.modal').modal('hide');
+      }
+    });
+  });
+
   $('body').on('click', 'a.task-action', function (e) {
     e.preventDefault();
     var user_task_row = $(this).closest('.task.user-task-row'),
         action = $(this).data('action'),
         task_name = $('strong.task-name', user_task_row).text();
-    $('body').on('click', '.pull-rq-field .btn-rm-pull .btn-circle',function () {
-      var parent_pull_rq = $(this).closest('div.pull-rq-field');
-      if (parent_pull_rq.find('div.pull-requestes').length > 1) {
-        $(this).closest('div.pull-requestes').remove();
-      } else {
-        alert(I18n.t('user_tasks.can_not_remove_pull'));
-      }
-    });
-
-    $('body').on('click', '.pull-rq-field .btn-submit-pull .btn-circle',function () {
-      var pull_rq = $(this).closest('div.pull-requestes').find('input.link-field').val(),
-          _that = this,
-          _url = $(this).closest('div.task.user-task-row').data('task');
-      $.ajax({
-        url: _url,
-        method: 'PATCH',
-        data: {pull_url: pull_rq},
-        complete: function (data) {
-          $(_that).closest('.modal').modal('hide');
-        }
-      });
-    });
 
     if (action === "edit") {
       str = user_task_row[0].id;

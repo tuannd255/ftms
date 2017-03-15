@@ -1,7 +1,7 @@
 <% if @trainee_type.errors.any? %>
   $(".errors").html("<%= j render "shared/error_messages", object: @trainee_type %>");
 <% else %>
-  $("#user_profile_attributes_trainee_type_id").append($("<option></option>")
+  $("#user_trainee_type_id").append($("<option></option>")
     .attr("value", <%= @trainee_type.id %>)
     .text("<%= @trainee_type.name %>")
     .prop("selected", true));

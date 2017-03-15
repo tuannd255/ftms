@@ -9,6 +9,9 @@ $color-body: #D9E4E6;
   border-right: 1px solid #ccc;
   border-top: 1px solid #ccc;
   padding: 0px 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   &.actions {
     min-width: 135px;

@@ -97,6 +97,7 @@ Rails.application.routes.draw do
     resources :notes, except: :index
     resources :universities, except: :show
     resources :statuses, except: :show
+    resources :languages, except: :show
     resources :trainee_types, except: :show
     resources :locations
     resources :organization_charts, only: :index
