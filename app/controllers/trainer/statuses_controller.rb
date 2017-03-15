@@ -16,12 +16,15 @@ class Trainer::StatusesController < ApplicationController
 
   def create
     @status = Status.new status_params
-    if @status.save
-      flash[:success] = flash_message "created"
-      redirect_to trainer_statuses_path
-    else
-      flash[:failed] = flash_message "not_created"
-      render :new
+    respond_to do |format|
+      if @status.save
+        flash.now[:success] = flash_message "created"
+        format.html{redirect_to trainer_statuses_path}
+      else
+        flash.now[:failed] = flash_message "not_created"
+        format.html{render :new}
+      end
+      format.js
     end
   end
 

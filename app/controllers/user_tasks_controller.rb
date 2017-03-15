@@ -39,6 +39,7 @@ class UserTasksController < ApplicationController
 
   def destroy
     user_task = UserTask.find params[:id]
+    load_data
     respond_to do |format|
       user_task.destroy
       format.js
