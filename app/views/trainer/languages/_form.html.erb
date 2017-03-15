@@ -1,0 +1,22 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for [:trainer, @language] do |f| %>
+      <%= render "shared/error_messages", object: @language %>
+      <div class="form-group">
+        <%= f.label :name %>
+        <%= f.text_field :name, class: "form-control", required: true %>
+      </div>
+      <div class="form-group">
+        <%= f.label :image %>
+        <%= f.file_field :image %>
+      </div>
+      <div class="form-group">
+        <%= f.label :description %>
+        <%= f.text_area :description, class: "form-control",
+          placeholder: I18n.t("languages.form.input_language_description") %>
+      </div>
+      <%= f.submit (f.object.new_record? ? t("buttons.create") : t("buttons.update")),
+        class: "btn btn-primary pull-right" %>
+    <% end %>
+  </div>
+</div>

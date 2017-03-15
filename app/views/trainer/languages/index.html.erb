@@ -1,0 +1,40 @@
+<div id="languages profile-active">
+  <p class="pull-right">
+    <% if policy new_trainer_language_path %>
+      <%= link_to t("buttons.create"),
+        new_trainer_language_path, class: "btn btn-success" %>
+    <% end %>
+  </p>
+  <table class="table table-striped tbl-language">
+    <thead>
+      <tr>
+        <th class="name"><%= t "languages.table.name" %></th>
+        <th class="image"><%= t "languages.table.image" %></th>
+        <th class="description"><%= t "languages.table.description" %></th>
+        <th class="action"><%= t "table.thread.action" %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @languages.each do |language| %>
+        <tr>
+          <td class="name"><%= language.name %></td>
+          <td class="image">
+            <%= image_tag language.image.thumb.url if language.image.file %>
+          </td>
+          <td class="description"><%= language.description %></td>
+          <td class="action">
+            <% if policy edit_trainer_language_path(language) %>
+              <%= link_to t("buttons.edit"),
+                edit_trainer_language_path(language) %>&nbsp;
+            <% end %>
+            <% if policy_with_method url: edit_trainer_language_path(language),
+              action: "destroy" %>
+              <%= link_to t("buttons.delete"), trainer_language_path(language),
+                method: :delete, data: {confirm: t("messages.delete.confirm")} %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+ </div>

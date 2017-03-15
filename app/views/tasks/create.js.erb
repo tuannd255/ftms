@@ -1,3 +1,4 @@
-$(".flash").html("<%= j render 'layouts/flash' %>");
-$("#TaskModal").modal("hide");
-$("#user-task-list").append("<%= j render 'subjects/user_task', user_task: @user_task %>");
+$('.flash').html('<%= j render "layouts/flash" %>');
+$('#TaskModal').modal('hide');
+$('#user-task-list').append('<%= j render "subjects/user_task", user_task: @user_task %>');
+$('.task-infor').html('<%= j render "subjects/task_statistic" %>')
