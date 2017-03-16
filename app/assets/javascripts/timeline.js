@@ -37,4 +37,11 @@ var handle_data_timeline = function() {
       $(this).append(html);
     }
   });
+  $('#timeline-embed .vco-slider .slider-item .content .content-\
+    container .media .media-wrapper .media-container .plain-text .container')
+    .each(function() {
+      if ($(this).text() == 'none') {
+        $(this).closest('.media').addClass('hidden');
+      }
+    });
 }

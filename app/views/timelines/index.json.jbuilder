@@ -16,10 +16,14 @@ json.timeline do
       json.asset do
         image = image_url user_subject.subject.image_url ?
           user_subject.subject.image_url : "profile.png"
-        list = ""
-        user_subject.user_tasks.each.with_index 1 do |user_task, index|
-          list << "<div class='user_task'><div class='task'
-          data-finish='#{user_task.complete?}'>- #{user_task.task_name}</div></div>"
+        if user_subject.user_tasks.any?
+          list = ""
+          user_subject.user_tasks.each.with_index 1 do |user_task, index|
+            list << "<div class='user_task'><div class='task'
+            data-finish='#{user_task.complete?}'>- #{user_task.task_name}</div></div>"
+          end
+        else
+          list = "none"
         end
         json.thumbnail image
         json.media list
@@ -36,6 +40,9 @@ json.timeline do
       json.headline t "timeline.headline"
       json.text t "timeline.content"
       json.tag " "
+      json.asset do
+        json.media "none"
+      end
     end
   end
 end
